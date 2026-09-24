@@ -34,7 +34,7 @@ export async function generateUniqueShareCode() {
   return code
 }
 
-export async function createEvent({ title, description, pinCode, expiresAt, userId }) {
+export async function createEvent({ title, description, pinCode, expiresAt, userId, coverImageUrl }) {
   const shareCode = await generateUniqueShareCode()
   const { data, error } = await supabase
     .from('events')
@@ -44,6 +44,7 @@ export async function createEvent({ title, description, pinCode, expiresAt, user
       pin_code: pinCode || null,
       share_code: shareCode,
       user_id: userId,
+      cover_image_url: coverImageUrl || null,
       expires_at: expiresAt ? new Date(expiresAt).toISOString() : null,
       status: EventStatus.ACTIVE
     })

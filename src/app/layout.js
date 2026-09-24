@@ -1,10 +1,16 @@
 import { Inter } from 'next/font/google';
 import { LanguageProvider } from '../context/LanguageContext';
 import { DemoProvider } from '../context/DemoContext';
-import { AuthProvider } from '../context/AuthContext';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
+import dynamic from 'next/dynamic';
 import './globals.css';
+
+// AuthProviderClient est un Client Component - on le charge côté client uniquement
+const AuthProviderClientDynamic = dynamic(() => import('../context/AuthProviderClient').then(mod => ({ default: mod.AuthProviderClient })), {
+  ssr: false,
+  loading: () => null
+});
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,13 +25,13 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <LanguageProvider>
           <DemoProvider>
-            <AuthProvider>
+            <AuthProviderClientDynamic>
               <Navbar />
               <main className="main-content">
                 {children}
               </main>
               <Footer />
-            </AuthProvider>
+            </AuthProviderClientDynamic>
           </DemoProvider>
         </LanguageProvider>
       </body>

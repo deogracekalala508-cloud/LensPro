@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createEvent } from '@/lib/events';
+import { useAuth } from '@/context/AuthContext';
 import styles from './create-event.module.css';
 import { getTranslations } from '@/lib/i18n';
 
@@ -9,6 +10,7 @@ export const dynamic = 'force-dynamic';
 
 export default function CreateEventPage() {
   const router = useRouter();
+  const { user } = useAuth();
   const t = typeof window !== 'undefined' ? getTranslations('fr') : { events: { createEvent: 'Create event', createSubtitle: 'Create a temporary social space', eventTitle: 'Event title', eventDescription: 'Description', pinCode: 'PIN code (optional)', expiryDate: 'Expiry date (optional)', coverImage: 'Cover image URL (optional)', create: 'Create', cancel: 'Cancel', error: 'Error' } };
   const [formData, setFormData] = useState({
     title: '',
@@ -27,6 +29,11 @@ export default function CreateEventPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!user) {
+      setError('Vous devez être connecté pour créer un événement.');
+      setIsCreating(false);
+      return;
+    }
     setIsCreating(true);
     setError('');
     setSuccess('');
@@ -37,7 +44,8 @@ export default function CreateEventPage() {
         description: formData.description,
         pinCode: formData.pinCode || null,
         expiresAt: formData.expiryDate ? new Date(formData.expiryDate) : null,
-        coverImageUrl: formData.coverImageUrl || null
+        coverImageUrl: formData.coverImageUrl || null,
+        userId: user?.id
       });
 
       setSuccess(`Event "${event.title}" created successfully!`);
