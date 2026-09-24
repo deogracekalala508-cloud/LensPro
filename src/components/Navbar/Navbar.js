@@ -28,15 +28,12 @@ export default function Navbar() {
           <Link href="/explore" className="nav-link" onClick={() => setIsOpen(false)}>{t?.nav?.explore || 'Explorer'}</Link>
           <Link href="/dashboard" className="nav-link" onClick={() => setIsOpen(false)}>{t?.nav?.dashboard || 'Dashboard'}</Link>
           <Link href="/events" className="nav-link" onClick={() => setIsOpen(false)}>{t?.nav?.events || 'Événements'}</Link>
-          <Link href="/admin" className="nav-link admin-link" onClick={() => setIsOpen(false)}>⚡ Admin</Link>
-          
           <div className="navbar-auth">
             <Link href="/auth/login" className="nav-link login" onClick={() => setIsOpen(false)}>{t?.nav?.login || 'Connexion'}</Link>
             <Link href="/auth/register" className="nav-btn register" onClick={() => setIsOpen(false)}>{t?.nav?.register || "S'inscrire"}</Link>
           </div>
-          
-          <button 
-            onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')} 
+          <button
+            onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
             className="lang-toggle"
             title="Changer de langue / Change language"
           >

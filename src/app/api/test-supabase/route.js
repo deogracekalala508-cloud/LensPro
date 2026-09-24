@@ -36,7 +36,7 @@ export async function GET() {
     // Tester la connexion Supabase
     const { data, error } = await supabase
       .from('profiles')
-      .select('id, username')
+      .select('id, full_name')
       .limit(1)
 
     if (error) {

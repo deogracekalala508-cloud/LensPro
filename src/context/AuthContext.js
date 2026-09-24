@@ -144,3 +144,4 @@ export const useUser = () => {
 };
 
 export default AuthContext;
+export { AuthContext };

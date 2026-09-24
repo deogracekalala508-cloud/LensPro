@@ -1,11 +1,11 @@
 'use client';
 // AuthProviderClient - Wrapper client pour AuthProvider
 // Ce fichier est le point d'entrée client qui rend le AuthContext Provider
+// Il utilise le contexte d'AuthContext.js pour assurer la compatibilité
 
-import { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { useContext, useState, useEffect, useCallback } from 'react';
 import { supabase } from '../lib/supabase';
-
-const AuthContext = createContext(null);
+import { AuthContext } from './AuthContext';
 
 // Détecte si Supabase est disponible
 const hasSupabase = typeof supabase !== 'undefined' && supabase !== null;
@@ -56,6 +56,11 @@ export function AuthProviderClient({ children }) {
 
     return () => { mounted = false; };
   }, []);
+
+  // Ne rendre les enfants qu'une fois l'authentification initialisée
+  if (loading) {
+    return null;
+  }
 
   const signIn = useCallback(async (email, password) => {
     if (!hasSupabase) {

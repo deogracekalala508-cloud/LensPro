@@ -55,22 +55,25 @@ export async function createEvent({ title, description, pinCode, expiresAt, user
 }
 
 export async function getEventByShareCode(shareCode) {
-  const { data, error } = await supabase
+  const { data: event, error: eventError } = await supabase
     .from('events')
-    .select(`
-      *,
-      posts(posts(*)),
-      participant_count(count),
-      post_count(count)
-    `)
+    .select('*')
     .eq('share_code', shareCode)
     .single()
-  if (error) throw error
-  if (!data) return null
+  if (eventError) throw eventError
+  if (!event) return null
+
+  const [{ data: posts }, { data: participant_count }, { data: post_count }] = await Promise.all([
+    supabase.from('event_posts').select('*').eq('event_id', event.id).order('created_at', { ascending: false }),
+    supabase.from('event_subscriptions').select('user_id').eq('event_id', event.id).eq('subscribed', true),
+    supabase.from('event_posts').select('id').eq('event_id', event.id)
+  ])
+
   return {
-    ...data,
-    participant_count: data.participant_count?.length || 0,
-    post_count: data.post_count?.length || 0
+    ...event,
+    posts: posts || [],
+    participant_count: participant_count?.length || 0,
+    post_count: post_count?.length || 0
   }
 }
 
