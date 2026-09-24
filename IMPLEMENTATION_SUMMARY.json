@@ -1,0 +1,100 @@
+{
+  "database_schema": "Tables créées: events (id, user_id, title, description, share_code, pin_code, cover_image_url, is_public, moderation_status, status, expires_at, participant_count, post_count, created_at, updated_at), event_posts (id, event_id, user_id, photo_url, thumbnail_url, caption, likes_count, is_featured, is_deleted, moderation_status, reported, created_at), event_participants (id, event_id, user_id, joined_at), event_post_likes (id, post_id, user_id, created_at). Policies RLS incluses. Fonctions: update_event_participant_count, update_event_post_count, generate_share_code.",
+  
+  "new_files": [
+    {
+      "code": "SQL schema for Supabase - tables, RLS policies, triggers, functions",
+      "path": "supabase_schema_events.sql",
+      "purpose": "Schéma DB pour la fonctionnalité Social Wall Events"
+    },
+    {
+      "code": "Service Supabase complet - CRUD events, posts, participants, likes, moderation, export",
+      "path": "src/lib/events.js",
+      "purpose": "Fonctions API pour gérer les événements, posts, participants et likes"
+    },
+    {
+      "code": "QR code generation utilities - dataURL, SVG, share URLs",
+      "path": "src/lib/qrCode.js",
+      "purpose": "Génération de QR codes pour partager les événements"
+    },
+    {
+      "code": "Export utilities - CSV, JSON, HTML printable gallery",
+      "path": "src/lib/export.js",
+      "purpose": "Export des posts vers différents formats"
+    },
+    {
+      "code": "React component - SocialWall - mur de souvenirs complet avec QR, export, mode écran géant",
+      "path": "src/components/SocialWall/SocialWall.js",
+      "purpose": "Composant principal du mur de souvenirs social"
+    },
+    {
+      "code": "Styles CSS pour le SocialWall - responsive, animations, modals",
+      "path": "src/components/SocialWall/SocialWall.css",
+      "purpose": "Feuille de style du composant SocialWall"
+    },
+    {
+      "code": "React component - EventQRCode - affichage et téléchargement QR code",
+      "path": "src/components/EventQRCode/EventQRCode.js",
+      "purpose": "Composant pour afficher le QR code de l'événement"
+    },
+    {
+      "code": "Styles CSS pour EventQRCode",
+      "path": "src/components/EventQRCode/EventQRCode.css",
+      "purpose": "Feuille de style du composant QR Code"
+    },
+    {
+      "code": "React component - GiantScreen - mode plein écran avec diaporama automatique",
+      "path": "src/components/GiantScreen/GiantScreen.js",
+      "purpose": "Mode écran géant pour affichage sur grand écran"
+    },
+    {
+      "code": "React component - ModerationPanel - interface admin pour approuver/rejeter/signaler",
+      "path": "src/components/ModerationPanel/ModerationPanel.js",
+      "purpose": "Panneau de modération pour les administrateurs"
+    },
+    {
+      "code": "React component - EventCreator - formulaire de création d'événement",
+      "path": "src/components/EventCreator/EventCreator.js",
+      "purpose": "Formulaire pour créer un nouvel événement social"
+    },
+    {
+      "code": "Page Next.js - /event/[shareCode] - route pour accéder au mur social",
+      "path": "src/pages/event/[shareCode].js",
+      "purpose": "Route page pour le mur de souvenirs"
+    },
+    {
+      "code": "API Route - POST /api/events - création d'événement",
+      "path": "src/pages/api/events.js",
+      "purpose": "Endpoint API pour créer un événement"
+    },
+    {
+      "code": "API Route - POST /api/events/[eventId]/join - rejoindre un événement",
+      "path": "src/pages/api/events/[eventId]/join.js",
+      "purpose": "Endpoint API pour rejoindre un événement"
+    }
+  ],
+  
+  "integration_points": [
+    "Tables events, event_posts, event_participants, event_post_likes s'intègrent avec la table existing profiles (user_id → profiles.id)",
+    "Le système de moderation_status ('pending', 'approved', 'rejected') est compatible avec le workflow existant",
+    "LesQR codes utilisent le même pattern que les galleries existantes (share_code unique)",
+    "L'export fonctionne avec les posts des événements, similaire à l'export de galeries",
+    "Le mode écran géant réutilise les composants d'affichage de photos existants",
+    "Les événements peuvent être fermés/expirés comme les galleries existantes",
+    "Les participants doivent s'authentifier (via Supabase Auth) pour participer et poster"
+  ],
+  
+  "payment_integration": "Le système d'abonnement existant (Mobile Money + validation admin) est réutilisé. Les événements sociaux sont inclus dans le plan Pro (comme indiqué dans les traductions i18n.js: 'QR Codes événements' dans les features Pro). Aucune modification du système de paiement n'est nécessaire - les événements sont créés par les photographes abonnés.",
+  
+  "security_measures": [
+    "RLS (Row Level Security) activée sur toutes les tables events, event_posts, event_participants, event_post_likes",
+    "Les events ne sont visibles que si is_public=true et status='active'",
+    "Les Posts nécessitent d'être participant de l'événement (vérifié via event_participants)",
+    "Les Posts sont modérés (moderation_status='approved') avant d'être affichés",
+    "Les utilisateurs ne peuvent modifier/supprimer que leurs propres posts",
+    "Les administrateurs peuvent fermer les événements",
+    "Code PIN optionnel pour protéger l'accès aux événements privés",
+    "Date d'expiration automatique pour archiver les événements",
+    "Signalement de posts possibles pour modération"
+  ]
+}

@@ -1,0 +1,8 @@
+# LensPro Supabase Project Configuration
+# Généré automatiquement - ne pas modifier manuellement
+
+project_id = "jjwzlgvpgrnyhufgbjah"
+project_url = "https://jjwzlgvpgrnyhufgbjah.supabase.co"
+
+[vercel]
+project_url = "https://lenspro.vercel.app"

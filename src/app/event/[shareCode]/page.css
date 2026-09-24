@@ -1,0 +1,8 @@
+.event-main {
+  min-height: 100vh;
+  background: #0a0a0f;
+}
+
+.event-main main {
+  min-height: calc(100vh - 60px);
+}

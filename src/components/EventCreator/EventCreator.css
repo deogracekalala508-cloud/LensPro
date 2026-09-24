@@ -1,0 +1,94 @@
+// EventCreator styles - optional CSS enhancement
+
+.event-creator-container {
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.event-creator-title {
+  margin-bottom: 20px;
+  color: #1a1a2e;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.event-creator-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.event-creator-label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}
+
+.event-creator-input {
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.event-creator-input:focus {
+  outline: none;
+  border-color: #1a1a2e;
+}
+
+.event-creator-textarea {
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  min-height: 100px;
+  resize: vertical;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.event-creator-textarea:focus {
+  outline: none;
+  border-color: #1a1a2e;
+}
+
+.event-creator-submit {
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.2s;
+}
+
+.event-creator-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26, 26, 46, 0.3);
+}
+
+.event-creator-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.event-creator-error {
+  background: #fee2e2;
+  color: #dc2626;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-bottom: 15px;
+}
