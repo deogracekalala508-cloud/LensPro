@@ -1,6 +1,7 @@
 import { Inter } from 'next/font/google';
 import { LanguageProvider } from '../context/LanguageContext';
 import { DemoProvider } from '../context/DemoContext';
+import { AuthProvider } from '../context/AuthContext';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
 import './globals.css';
@@ -18,11 +19,13 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <LanguageProvider>
           <DemoProvider>
-            <Navbar />
-            <main className="main-content">
-              {children}
-            </main>
-            <Footer />
+            <AuthProvider>
+              <Navbar />
+              <main className="main-content">
+                {children}
+              </main>
+              <Footer />
+            </AuthProvider>
           </DemoProvider>
         </LanguageProvider>
       </body>

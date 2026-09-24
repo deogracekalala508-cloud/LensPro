@@ -1,3 +1,4 @@
+'use client';
 // AuthContext - Support du mode démo (localStorage) et du mode réel (Supabase Auth)
 // À privilégier: Supabase Auth quand les credentials sont configurés
 

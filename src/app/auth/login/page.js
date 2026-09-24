@@ -4,12 +4,16 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
+import { useAuth } from '@/context/AuthContext';
 import './login.css';
+
+export const dynamic = 'force-dynamic';
 
 export default function LoginPage() {
   const router = useRouter();
   const { language } = useLanguage();
-  
+  const { signIn, hasSupabase } = useAuth();
+
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
 
@@ -51,24 +55,23 @@ export default function LoginPage() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
     if (!formData.email) newErrors.email = curr.emailReq;
     if (!formData.password) newErrors.password = curr.passReq;
-    
+
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
 
-    console.log('Login submitted:', formData);
-    // Mock user login
-    localStorage.setItem('lenspro_user', JSON.stringify({ 
-      email: formData.email, 
-      role: 'photographer',
-      name: 'Photographe Test'
-    }));
+    setErrors({});
+    const result = await signIn(formData.email, formData.password);
+    if (!result.success) {
+      setErrors({ form: result.error || (hasSupabase ? 'Erreur de connexion' : 'Erreur connexion') });
+      return;
+    }
     router.push('/dashboard');
   };
 

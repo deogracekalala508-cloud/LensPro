@@ -184,13 +184,13 @@ function ModerationPanel({ posts, onApprove, onReject, onReport, isLoading = fal
           onClick: () => handleSelect(post)
         },
           React.createElement('img', {
-            src: post.thumbnail_url || post.photo_url,
+            src: post.content_url || '',
             alt: '',
             style: thumbStyle
           }),
           React.createElement('div', { style: infoStyle },
-            React.createElement('div', { style: authorStyle }, post.user?.full_name || 'Invité'),
-            React.createElement('div', { style: captionStyle }, post.caption || 'Sans légende')
+            React.createElement('div', { style: authorStyle }, post.user_name || 'Invité'),
+            React.createElement('div', { style: captionStyle }, post.text_content || 'Sans légende')
           ),
           React.createElement('div', { style: actionsStyle },
             actions

@@ -4,11 +4,15 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
+import { useAuth } from '@/context/AuthContext';
 import './register.css';
+
+export const dynamic = 'force-dynamic';
 
 export default function RegisterPage() {
   const router = useRouter();
   const { language } = useLanguage();
+  const { signUp, hasSupabase } = useAuth();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     fullName: '',
@@ -76,21 +80,29 @@ export default function RegisterPage() {
   const nextStep = () => setStep((s) => Math.min(s + 1, 3));
   const prevStep = () => setStep((s) => Math.max(s - 1, 1));
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (step < 3) {
       nextStep();
       return;
     }
-    
-    console.log('Register submitted:', formData);
-    localStorage.setItem('lenspro_user', JSON.stringify({
-      email: formData.email,
-      name: formData.fullName,
+
+    if (formData.password !== formData.confirmPassword) {
+      alert(curr.confirmPass + ' ne correspond pas.');
+      return;
+    }
+
+    setErrors({});
+    const result = await signUp(formData.email, formData.password, {
+      fullName: formData.fullName,
       username: formData.username,
+      city: formData.city,
       specialty: formData.specialty,
-      role: 'photographer'
-    }));
+    });
+    if (!result.success) {
+      setErrors({ form: result.error || (hasSupabase ? 'Erreur d\'inscription' : 'Erreur inscription') });
+      return;
+    }
     router.push('/dashboard');
   };
 

@@ -1,24 +1,24 @@
 // Export utilities for social wall events
 
 export function exportPostsToCSV(posts) {
-  const headers = ['ID', 'Caption', 'Author', 'Author Username', 'Photo URL', 'Likes', 'Created At', 'Featured']
-  
+  const headers = ['ID', 'Text Content', 'Author Name', 'Author Email', 'Content URL', 'Content Type', 'Moderation Status', 'Created At']
+
   const rows = posts.map(post => [
     post.id,
-    `"${(post.caption || '').replace(/"/g, '""')}"`,
-    post.user?.full_name || 'Anonymous',
-    post.user?.username || '',
-    post.photo_url,
-    post.likes?.length || 0,
+    `"${(post.text_content || '').replace(/"/g, '""')}"`,
+    post.user_name || 'Invité',
+    post.user_email || '',
+    post.content_url || '',
+    post.content_type || '',
+    post.moderation_status || '',
     post.created_at,
-    post.is_featured ? 'Yes' : 'No'
   ])
-  
+
   const csv = [
     headers.join(','),
     ...rows.map(row => row.join(','))
   ].join('\n')
-  
+
   return csv
 }
 
@@ -29,14 +29,14 @@ export function exportPostsToJSON(posts) {
 export function downloadFile(content, filename, mimeType = 'text/plain') {
   const blob = new Blob([content], { type: mimeType })
   const url = URL.createObjectURL(blob)
-  
+
   const link = document.createElement('a')
   link.href = url
   link.download = filename
   document.body.appendChild(link)
   link.click()
   document.body.removeChild(link)
-  
+
   URL.revokeObjectURL(url)
 }
 
@@ -55,17 +55,19 @@ export function exportEventData(event, posts, format = 'json') {
     },
     posts: posts.map(post => ({
       id: post.id,
-      caption: post.caption,
-      photo_url: post.photo_url,
-      thumbnail_url: post.thumbnail_url,
-      author: post.user,
-      likes: post.likes?.length || 0,
-      is_featured: post.is_featured,
+      text_content: post.text_content,
+      content_url: post.content_url,
+      content_type: post.content_type,
+      audio_url: post.audio_url,
+      user_name: post.user_name,
+      user_email: post.user_email,
+      moderation_status: post.moderation_status,
+      is_hidden: post.is_hidden,
       created_at: post.created_at
     })),
     exported_at: new Date().toISOString()
   }
-  
+
   if (format === 'json') {
     return {
       content: JSON.stringify(data, null, 2),
@@ -73,7 +75,7 @@ export function exportEventData(event, posts, format = 'json') {
       mimeType: 'application/json'
     }
   }
-  
+
   const csv = exportPostsToCSV(posts)
   return {
     content: csv,
@@ -85,16 +87,16 @@ export function exportEventData(event, posts, format = 'json') {
 // Generate a printable gallery layout HTML
 export function generatePrintableGallery(posts, eventTitle, eventDate) {
   const photosHtml = posts
-    .filter(p => p.photo_url)
+    .filter(p => p.content_url && (p.content_type === 'image' || p.content_type === 'video'))
     .map(p => `
       <div class="gallery-photo">
-        <img src="${p.photo_url}" alt="${p.caption || 'Photo'}" />
-        <div class="photo-caption">${p.caption || ''}</div>
-        <div class="photo-author">${p.user?.full_name || 'Invité'}</div>
+        <img src="${p.content_url}" alt="${p.text_content || 'Photo'}" />
+        <div class="photo-caption">${p.text_content || ''}</div>
+        <div class="photo-author">${p.user_name || 'Invité'}</div>
       </div>
     `)
     .join('\n')
-  
+
   return `
 <!DOCTYPE html>
 <html lang="fr">
@@ -159,7 +161,7 @@ export function generatePrintableGallery(posts, eventTitle, eventDate) {
 <body>
   <div class="header">
     <h1>${eventTitle}</h1>
-    <p>${eventDate} • ${posts.length} photos</p>
+    <p>${eventDate} • ${posts.length} posts</p>
   </div>
   <div class="gallery-grid">
     ${photosHtml}
