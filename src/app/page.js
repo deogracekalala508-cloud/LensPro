@@ -46,13 +46,10 @@ export default function LandingPage() {
     <main className="page-wrapper">
       {/* Hero Section */}
       <section className="hero">
-        <div className="hero-bg">
-          <div className="orb-1"></div>
-          <div className="orb-2"></div>
-        </div>
+        <div className="hero-bg"></div>
         <div className="container">
           <div className="hero-content">
-            <div className="trial-badge">⚡ 14 jours d'essai gratuit</div>
+            <div className="trial-badge">14 jours d'essai gratuit</div>
             <h1 className="hero-title">
               Votre vitrine photo{' '}
               <span className="gradient-text">professionnelle</span>
@@ -62,24 +59,24 @@ export default function LandingPage() {
             </p>
             <div className="hero-actions">
               <Link href="/auth/register" className="btn-primary">
-                🚀 Commencer gratuitement
+                Commencer gratuitement
               </Link>
               <Link href="/explore" className="btn-outline">
-                🔍 Découvrir les photographes
+                Découvrir les photographes
               </Link>
             </div>
             
             <div className="hero-stats">
               <div className="stat-item">
-                <span className="stat-value gradient-text">500+</span>
+                <span className="stat-value">500+</span>
                 <span className="stat-label">Photographes</span>
               </div>
               <div className="stat-item">
-                <span className="stat-value gradient-text">50K+</span>
+                <span className="stat-value">50K+</span>
                 <span className="stat-label">Photos Haute Qualité</span>
               </div>
               <div className="stat-item">
-                <span className="stat-value gradient-text">10K+</span>
+                <span className="stat-value">10K+</span>
                 <span className="stat-label">Clients Satisfaits</span>
               </div>
             </div>
@@ -96,14 +93,14 @@ export default function LandingPage() {
           </div>
           
           <div className="features-grid">
-            <FeatureCard icon="📸" title="Portfolio Public" desc="Exposez vos plus belles photos au monde entier avec une vitrine élégante." />
-            <FeatureCard icon="🔒" title="Galeries Privées Clients" desc="Livrez les photos de vos événements en qualité originale sans aucune compression WhatsApp !" />
-            <FeatureCard icon="🌐" title="Réseau Social Photographes" desc="Rejoignez la communauté, échangez des likes et gagnez en visibilité." />
-            <FeatureCard icon="✨" title="Slider Avant / Après" desc="Montrez la puissance de votre travail de retouche avec un comparateur interactif." />
-            <FeatureCard icon="📱" title="QR Code Événement" desc="Générez un QR code pour vos événements. Les invités scannent et accèdent aux photos." />
-            <FeatureCard icon="📊" title="Analytiques Avancés" desc="Suivez en direct vos vues, likes et téléchargements clients." />
-            <FeatureCard icon="©️" title="Filigrane Automatique" desc="Protégez vos photos publiques contre le vol avec un filigrane personnalisable." />
-            <FeatureCard icon="💎" title="Paiement Mobile Money" desc="Abonnez-vous facilement via Airtel Money et Orange Money avec activation rapide." />
+            <FeatureCard icon="P" title="Portfolio Public" desc="Exposez vos plus belles photos au monde entier avec une vitrine élégante." />
+            <FeatureCard icon="G" title="Galeries Privées Clients" desc="Livrez les photos de vos événements en qualité originale sans aucune compression WhatsApp." />
+            <FeatureCard icon="S" title="Réseau Social Photographes" desc="Rejoignez la communauté, échangez des likes et gagnez en visibilité." />
+            <FeatureCard icon="B" title="Slider Avant / Après" desc="Montrez la puissance de votre travail de retouche avec un comparateur interactif." />
+            <FeatureCard icon="Q" title="QR Code Événement" desc="Générez un QR code pour vos événements. Les invités scannent et accèdent aux photos." />
+            <FeatureCard icon="A" title="Analytiques Avancés" desc="Suivez en direct vos vues, likes et téléchargements clients." />
+            <FeatureCard icon="F" title="Filigrane Automatique" desc="Protégez vos photos publiques contre le vol avec un filigrane personnalisable." />
+            <FeatureCard icon="M" title="Paiement Mobile Money" desc="Abonnez-vous facilement via Airtel Money et Orange Money avec activation rapide." />
           </div>
         </div>
       </section>
@@ -152,7 +149,7 @@ export default function LandingPage() {
               { name: 'Alain Nsengiyumva', city: 'Goma', spec: 'Nature', avatar: 'https://i.pravatar.cc/150?img=33', seed: 3 },
               { name: 'Sophie Kameni', city: 'Douala', spec: 'Mode', avatar: 'https://i.pravatar.cc/150?img=47', seed: 4 },
             ].map((p, idx) => (
-              <div key={idx} className="photographer-card glass-card">
+              <div key={idx} className="photographer-card">
                 <div className="pc-header">
                   <img src={p.avatar} alt={p.name} className="pc-avatar" />
                   <div className="pc-info">
@@ -182,40 +179,40 @@ export default function LandingPage() {
           
           <div className="pricing-grid">
             {/* Free Trial Plan */}
-            <div className="pricing-card glass-card">
+            <div className="pricing-card">
               <div className="trial-badge">14 Jours Offerts</div>
               <h3 className="plan-name">Essai Gratuit</h3>
               <div className="plan-price">0$<span style={{ fontSize: '1rem', color: '#a0a0a0' }}> / 14 jours</span></div>
               <ul className="plan-features">
-                <li>✅ 14 jours d'accès complet sans engagement</li>
-                <li>✅ Portfolio public d'exposition</li>
-                <li>✅ 3 Galeries privées clients</li>
-                <li>✅ Filigrane LensPro</li>
-                <li>✅ Support par email et WhatsApp</li>
+                <li>14 jours d'accès complet sans engagement</li>
+                <li>Portfolio public d'exposition</li>
+                <li>3 Galeries privées clients</li>
+                <li>Filigrane LensPro</li>
+                <li>Support par email et WhatsApp</li>
               </ul>
               <Link href="/auth/register" className="btn-outline plan-btn">
-                🎁 Commencer l'essai gratuit
+                Commencer l'essai gratuit
               </Link>
             </div>
             
             {/* Pro Plan */}
-            <div className="pricing-card glass-card pro">
-              <div className="popular-badge">Populaire & Recommandé</div>
+            <div className="pricing-card pro">
+              <div className="popular-badge">Populaire</div>
               <h3 className="plan-name">Professionnel</h3>
               <div className="plan-price">50$<span> / mois</span></div>
               <ul className="plan-features">
-                <li>🌟 Stockage & Galeries illimités</li>
-                <li>🌟 Qualité photo originale sans perte</li>
-                <li>🌟 Slider Avant / Après retouche</li>
-                <li>🌟 Codes PIN & QR Codes pour événements</li>
-                <li>🌟 Badge Pro Vérifié sur votre profil</li>
-                <li>🌟 Support prioritaire 7j/7 via WhatsApp</li>
+                <li>Stockage et galeries illimités</li>
+                <li>Qualité photo originale sans perte</li>
+                <li>Slider Avant / Après retouche</li>
+                <li>Codes PIN et QR Codes pour événements</li>
+                <li>Badge Pro Vérifié sur votre profil</li>
+                <li>Support prioritaire 7j/7 via WhatsApp</li>
               </ul>
               <button 
                 onClick={() => setShowPaymentModal(true)} 
                 className="btn-primary plan-btn"
               >
-                📲 S'abonner maintenant (50$/mois)
+                S'abonner maintenant (50$/mois)
               </button>
             </div>
           </div>
@@ -231,8 +228,7 @@ export default function LandingPage() {
           </div>
           
           <div className="contact-grid">
-            <div className="contact-card glass-card airtel">
-              <div className="contact-icon">📱</div>
+            <div className="contact-card airtel">
               <h4 className="contact-number">099 90 68 332</h4>
               <p className="contact-operator">Airtel Money</p>
               <a 
@@ -241,12 +237,11 @@ export default function LandingPage() {
                 rel="noopener noreferrer" 
                 className="wa-btn"
               >
-                💬 Contacter sur WhatsApp (Airtel)
+                Contacter sur WhatsApp
               </a>
             </div>
             
-            <div className="contact-card glass-card orange">
-              <div className="contact-icon">📱</div>
+            <div className="contact-card orange">
               <h4 className="contact-number">089 20 89 958</h4>
               <p className="contact-operator">Orange Money</p>
               <a 
@@ -255,7 +250,7 @@ export default function LandingPage() {
                 rel="noopener noreferrer" 
                 className="wa-btn"
               >
-                💬 Contacter sur WhatsApp (Orange)
+                Contacter sur WhatsApp
               </a>
             </div>
           </div>
@@ -272,7 +267,7 @@ export default function LandingPage() {
           
           <div className="testi-grid">
             {approvedTestimonials.map((tItem) => (
-              <div key={tItem.id} className="testi-card glass-card">
+              <div key={tItem.id} className="testi-card">
                 <div className="testi-stars">{'★'.repeat(tItem.rating || 5)}</div>
                 <p className="testi-text">"{tItem.text}"</p>
                 <div className="testi-author">
@@ -291,7 +286,7 @@ export default function LandingPage() {
               onClick={() => setShowTestimonialModal(true)} 
               className="btn-outline"
             >
-              ✍️ Laisser un témoignage
+              Laisser un témoignage
             </button>
           </div>
         </div>
@@ -301,10 +296,10 @@ export default function LandingPage() {
       <div className="container" style={{ margin: '4rem auto' }}>
         <div className="cta-banner">
           <div className="cta-content">
-            <h2 className="cta-title">Prêt à propulser votre art photo ?</h2>
-            <p className="cta-desc">Rejoignez la plateforme numéro 1 pour photographes professionnels.</p>
+            <h2 className="cta-title">Prêt à développer votre activité photo ?</h2>
+            <p className="cta-desc">Rejoignez les photographes qui utilisent LensPro pour présenter leur travail et livrer leurs galeries clients.</p>
             <Link href="/auth/register" className="btn-primary cta-btn">
-              🚀 Commencer l'essai gratuit de 14 jours
+              Commencer l'essai gratuit de 14 jours
             </Link>
           </div>
         </div>
@@ -313,9 +308,9 @@ export default function LandingPage() {
       {/* PAYMENT MODAL */}
       {showPaymentModal && (
         <div className="modal-overlay" onClick={() => setShowPaymentModal(false)}>
-          <div className="modal-card glass-card" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setShowPaymentModal(false)}>✕</button>
-            <h3 className="modal-title">📲 Activer votre Abonnement Pro (50$/mois)</h3>
+          <div className="modal-card" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowPaymentModal(false)}>Fermer</button>
+            <h3 className="modal-title">Activer votre Abonnement Pro (50$/mois)</h3>
             <p className="modal-desc">
               Pour vous abonner ou prolonger votre compte, effectuez un dépôt de <strong>50$</strong> via Mobile Money puis contactez l'administration sur WhatsApp avec votre preuve de paiement :
             </p>
@@ -331,7 +326,7 @@ export default function LandingPage() {
                   className="btn-primary"
                   style={{ display: 'inline-block', marginTop: '0.75rem', fontSize: '0.9rem' }}
                 >
-                  Envoyer Preuve sur WhatsApp
+                  Envoyer preuve sur WhatsApp
                 </a>
               </div>
 
@@ -345,13 +340,13 @@ export default function LandingPage() {
                   className="btn-primary"
                   style={{ display: 'inline-block', marginTop: '0.75rem', fontSize: '0.9rem' }}
                 >
-                  Envoyer Preuve sur WhatsApp
+                  Envoyer preuve sur WhatsApp
                 </a>
               </div>
             </div>
 
             <p style={{ fontSize: '0.85rem', color: '#a0a0b5', marginTop: '1.5rem', textAlign: 'center' }}>
-              Une fois votre paiement vérifié par l'administrateur, votre compte sera activé instantanément pour 30 jours !
+              Une fois votre paiement vérifié par l'administrateur, votre compte sera activé instantanément pour 30 jours.
             </p>
           </div>
         </div>
@@ -360,14 +355,13 @@ export default function LandingPage() {
       {/* TESTIMONIAL MODAL */}
       {showTestimonialModal && (
         <div className="modal-overlay" onClick={() => setShowTestimonialModal(false)}>
-          <div className="modal-card glass-card" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setShowTestimonialModal(false)}>✕</button>
-            <h3 className="modal-title">✍️ Laisser un témoignage</h3>
+          <div className="modal-card" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowTestimonialModal(false)}>Fermer</button>
+            <h3 className="modal-title">Laisser un témoignage</h3>
             
             {testiSubmitted ? (
               <div style={{ textAlign: 'center', padding: '2rem 0' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🎉</div>
-                <h4>Merci pour votre témoignage !</h4>
+                <h4 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Merci pour votre témoignage !</h4>
                 <p style={{ color: '#a0a0b5', fontSize: '0.9rem', marginTop: '0.5rem' }}>
                   Votre avis a été soumis. Il sera publié sur la plateforme après validation par l'administrateur.
                 </p>
@@ -396,11 +390,11 @@ export default function LandingPage() {
                 </div>
 
                 <div className="form-group">
-                  <label>Note (Étoiles)</label>
+                  <label>Note</label>
                   <select value={testiRating} onChange={(e) => setTestiRating(e.target.value)}>
-                    <option value="5">⭐⭐⭐⭐⭐ (5/5)</option>
-                    <option value="4">⭐⭐⭐⭐ (4/5)</option>
-                    <option value="3">⭐⭐⭐ (3/5)</option>
+                    <option value="5">5 sur 5</option>
+                    <option value="4">4 sur 5</option>
+                    <option value="3">3 sur 5</option>
                   </select>
                 </div>
 
@@ -429,7 +423,7 @@ export default function LandingPage() {
 
 function FeatureCard({ icon, title, desc }) {
   return (
-    <div className="feature-card glass-card">
+    <div className="feature-card">
       <div className="feature-icon">{icon}</div>
       <h3 className="feature-title">{title}</h3>
       <p className="feature-desc">{desc}</p>

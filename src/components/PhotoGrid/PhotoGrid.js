@@ -40,7 +40,7 @@ const PhotoGrid = ({ photos, onPhotoClick, showOverlay = true, columns = { mobil
                   </div>
                 )}
                 <div className="photo-grid-likes">
-                  ♥ {photo.likes || 0}
+                {photo.likes || 0} likes
                 </div>
               </div>
               <div className="photo-grid-bottom">

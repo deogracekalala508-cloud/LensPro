@@ -112,10 +112,10 @@ export default function Settings() {
                   <p>Contactez-nous sur WhatsApp pour activer votre abonnement après paiement :</p>
                   <div className={styles.contactLinks}>
                     <a href="https://wa.me/243999068332" target="_blank" rel="noreferrer" className={styles.contactBtn}>
-                      📱 Airtel Money: 099 90 68 332
+                      Airtel Money: 099 90 68 332
                     </a>
                     <a href="https://wa.me/243892089958" target="_blank" rel="noreferrer" className={`${styles.contactBtn} ${styles.orangeBtn}`}>
-                      📱 Orange Money: 089 20 89 958
+                      Orange Money: 089 20 89 958
                     </a>
                   </div>
                 </div>

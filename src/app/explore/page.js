@@ -48,7 +48,7 @@ export default function ExplorePage() {
           <p>Les meilleurs photographes professionnels</p>
           
           <div className="search-bar">
-            <span className="search-icon">🔍</span>
+            <span className="search-icon">⌕</span>
             <input 
               type="text" 
               placeholder="Rechercher une photo, un photographe, un style..."
@@ -75,16 +75,16 @@ export default function ExplorePage() {
 
         <div className="feed-toggle">
           <button 
-            className={`toggle-btn ${activeTab === 'tendances' ? 'active' : ''}`}
-            onClick={() => setActiveTab('tendances')}
+          className={`toggle-btn ${activeTab === 'tendances' ? 'active' : ''}`}
+          onClick={() => setActiveTab('tendances')}
           >
-            🔥 Tendances
+          Tendances
           </button>
           <button 
-            className={`toggle-btn ${activeTab === 'recentes' ? 'active' : ''}`}
-            onClick={() => setActiveTab('recentes')}
+          className={`toggle-btn ${activeTab === 'recentes' ? 'active' : ''}`}
+          onClick={() => setActiveTab('recentes')}
           >
-            ✨ Récentes
+          Récentes
           </button>
         </div>
       </section>
@@ -107,7 +107,6 @@ export default function ExplorePage() {
           </>
         ) : (
           <div style={{ textAlign: 'center', padding: '4rem 1rem', color: '#a0a0b5' }}>
-            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📸</div>
             <h3>Aucune photo trouvée</h3>
             <p style={{ marginTop: '0.5rem' }}>
               {demoMode ? 'Essayez de changer de catégorie ou de filtre.' : 'Soyez le premier photographe abonné à publier vos photos sur la plateforme !'}

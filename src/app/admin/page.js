@@ -76,7 +76,7 @@ export default function AdminDashboard() {
     return (
       <div className={styles.loginOverlay}>
         <div className={styles.loginCard}>
-          <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>🔐</div>
+          <div style={{ fontSize: '2rem', marginBottom: '0.5rem', fontWeight: 700 }}>ADMIN</div>
           <h2 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem' }}>Accès Administration</h2>
           <p style={{ color: '#a0a0b5', fontSize: '0.9rem', marginBottom: '1.5rem' }}>
             Veuillez entrer le mot de passe administrateur pour accéder à la gestion de LensPro.
@@ -92,7 +92,7 @@ export default function AdminDashboard() {
               autoFocus
             />
             {passError && (
-              <p style={{ color: '#ef4444', fontSize: '0.85rem' }}>❌ Code incorrect. Essayez "admin123".</p>
+            <p style={{ color: '#ef4444', fontSize: '0.85rem' }}>Code incorrect. Vérifiez votre saisie.</p>
             )}
             <button type="submit" className={styles.btnPrimary} style={{ width: '100%' }}>
               Déverrouiller le Panneau Admin
@@ -108,13 +108,13 @@ export default function AdminDashboard() {
       {/* Header */}
       <header className={styles.header}>
         <div>
-          <h1 className={styles.title}>⚡ Panneau d'Administration LensPro</h1>
+          <h1 className={styles.title}>Panneau d'Administration LensPro</h1>
           <p className={styles.subtitle}>Supervision globale, gestion des abonnements, mode démo et témoignages</p>
         </div>
 
         <div className={styles.headerActions}>
           <button onClick={() => setIsAdminAuthenticated(false)} className={styles.btnOutline}>
-            🔒 Déconnexion Admin
+            Déconnexion Admin
           </button>
         </div>
       </header>
@@ -149,25 +149,25 @@ export default function AdminDashboard() {
           className={`${styles.tabBtn} ${activeTab === 'photographers' ? styles.tabActive : ''}`}
           onClick={() => setActiveTab('photographers')}
         >
-          👥 Photographes Abonnés ({photographers.length})
+          Photographes Abonnés ({photographers.length})
         </button>
         <button
           className={`${styles.tabBtn} ${activeTab === 'demo' ? styles.tabActive : ''}`}
           onClick={() => setActiveTab('demo')}
         >
-          🖼️ Mode Démo ({demoMode ? 'Activé' : 'Désactivé'})
+          Mode Démo ({demoMode ? 'Activé' : 'Désactivé'})
         </button>
         <button
           className={`${styles.tabBtn} ${activeTab === 'testimonials' ? styles.tabActive : ''}`}
           onClick={() => setActiveTab('testimonials')}
         >
-          💬 Témoignages Client ({testimonials.length})
+          Témoignages Client ({testimonials.length})
         </button>
         <button
           className={`${styles.tabBtn} ${activeTab === 'scalability' ? styles.tabActive : ''}`}
           onClick={() => setActiveTab('scalability')}
         >
-          🚀 Guide 1000+ Photographes
+          Guide 1000+ Photographes
         </button>
       </div>
 
@@ -235,7 +235,7 @@ export default function AdminDashboard() {
                           className={`${styles.actionBtn} ${p.status === 'Actif' ? styles.deactivateBtn : styles.activateBtn}`}
                           title={p.status === 'Actif' ? 'Désactiver le compte' : 'Activer le compte (Payé 50$)'}
                         >
-                          {p.status === 'Actif' ? '🚫 Désactiver' : '✅ Valider 50$'}
+                          {p.status === 'Actif' ? 'Désactiver' : 'Valider 50$'}
                         </button>
 
                         <button
@@ -243,7 +243,7 @@ export default function AdminDashboard() {
                           className={`${styles.actionBtn} ${styles.deleteBtn}`}
                           title="Supprimer ce compte"
                         >
-                          🗑️
+                          Supprimer
                         </button>
                       </div>
                     </td>
@@ -259,7 +259,7 @@ export default function AdminDashboard() {
       {activeTab === 'demo' && (
         <div className={styles.tableSection} style={{ padding: '2rem' }}>
           <h2 style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: '0.5rem' }}>
-            🖼️ Mode Démo & Photos de Démonstration
+            Mode Démo & Photos de Démonstration
           </h2>
           <p style={{ color: '#a0a0b5', fontSize: '0.95rem', marginBottom: '2rem', maxWidth: '700px' }}>
             Par défaut, le mode démo affiche des photos et profils fictifs d'exemple pour montrer le potentiel de LensPro aux nouveaux visiteurs. 
@@ -270,7 +270,7 @@ export default function AdminDashboard() {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
                 <h4 style={{ fontSize: '1.1rem', fontWeight: 600, color: '#fff', marginBottom: '4px' }}>
-                  Statut du Mode Démo : {demoMode ? '🟢 ACTIVÉ (Photos d\'exemples affichées)' : '🔴 DÉSACTIVÉ (Uniquement vrais abonnés)'}
+                  Statut du Mode Démo : {demoMode ? 'ACTIVÉ (Photos d\'exemples affichées)' : 'DÉSACTIVÉ (Uniquement vrais abonnés)'}
                 </h4>
                 <p style={{ color: '#a0a0b5', fontSize: '0.85rem' }}>
                   {demoMode 
@@ -345,7 +345,7 @@ export default function AdminDashboard() {
                             className={`${styles.actionBtn} ${styles.activateBtn}`}
                             title="Publier sur la landing page"
                           >
-                            ✅ Publier
+                            Publier
                           </button>
                         )}
                         <button
@@ -353,7 +353,7 @@ export default function AdminDashboard() {
                           className={`${styles.actionBtn} ${styles.deleteBtn}`}
                           title="Supprimer"
                         >
-                          🗑️
+                          Supprimer
                         </button>
                       </div>
                     </td>
@@ -369,36 +369,36 @@ export default function AdminDashboard() {
       {activeTab === 'scalability' && (
         <div className={styles.tableSection} style={{ padding: '2rem' }}>
           <h2 style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: '0.5rem' }}>
-            🚀 Guide pour Gérer 1000+ Photographes & Financer l'Hébergement
+          Guide pour Gérer 1000+ Photographes & Financer l'Hébergement
           </h2>
           <p style={{ color: '#a0a0b5', fontSize: '0.95rem', marginBottom: '2rem' }}>
             Voici le plan financier et technique pour passer de vos premiers abonnés à plus de 1000 photographes en toute sérénité.
           </p>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
-            <div className={styles.statCard} style={{ background: 'rgba(37, 99, 235, 0.1)', borderColor: 'rgba(37, 99, 235, 0.3)' }}>
-              <h4 style={{ color: '#60a5fa', fontSize: '1.1rem', marginBottom: '8px' }}>💰 Simulation de Revenus</h4>
-              <p style={{ fontSize: '1.8rem', fontWeight: 800, color: '#fff' }}>50 000 $ / mois</p>
-              <p style={{ color: '#a0a0b5', fontSize: '0.85rem', marginTop: '8px' }}>
-                1 000 photographes × 50$/mois = 50 000 $ bruts par mois (600 000 $ / an !).
-              </p>
-            </div>
+          <div className={styles.statCard} style={{ background: 'rgba(37, 99, 235, 0.1)', borderColor: 'rgba(37, 99, 235, 0.3)' }}>
+            <h4 style={{ color: '#60a5fa', fontSize: '1.1rem', marginBottom: '8px' }}>Simulation de Revenus</h4>
+            <p style={{ fontSize: '1.8rem', fontWeight: 800, color: '#fff' }}>50 000 $ / mois</p>
+            <p style={{ color: '#a0a0b5', fontSize: '0.85rem', marginTop: '8px' }}>
+              1 000 photographes × 50$/mois = 50 000 $ bruts par mois (600 000 $ / an).
+            </p>
+          </div>
 
-            <div className={styles.statCard} style={{ background: 'rgba(16, 185, 129, 0.1)', borderColor: 'rgba(16, 185, 129, 0.3)' }}>
-              <h4 style={{ color: '#34d399', fontSize: '1.1rem', marginBottom: '8px' }}>☁️ Coûts d'Hébergement (Cloud)</h4>
-              <p style={{ fontSize: '1.8rem', fontWeight: 800, color: '#fff' }}>~ 100 $ - 300 $ / mois</p>
-              <p style={{ color: '#a0a0b5', fontSize: '0.85rem', marginTop: '8px' }}>
-                Le coût d'hébergement Supabase Pro (25$/mois) + Vercel Pro (20$/mois) + Stockage Cloudflare R2 est extrêmement bas !
-              </p>
-            </div>
+          <div className={styles.statCard} style={{ background: 'rgba(16, 185, 129, 0.1)', borderColor: 'rgba(16, 185, 129, 0.3)' }}>
+            <h4 style={{ color: '#34d399', fontSize: '1.1rem', marginBottom: '8px' }}>Coûts d'Hébergement (Cloud)</h4>
+            <p style={{ fontSize: '1.8rem', fontWeight: 800, color: '#fff' }}>~ 100 $ - 300 $ / mois</p>
+            <p style={{ color: '#a0a0b5', fontSize: '0.85rem', marginTop: '8px' }}>
+              Le coût d'hébergement Supabase Pro (25$/mois) + Vercel Pro (20$/mois) + Stockage Cloudflare R2 est extrêmement bas !
+            </p>
+          </div>
 
-            <div className={styles.statCard} style={{ background: 'rgba(245, 158, 11, 0.1)', borderColor: 'rgba(245, 158, 11, 0.3)' }}>
-              <h4 style={{ color: '#fbbf24', fontSize: '1.1rem', marginBottom: '8px' }}>📈 Marge Bénéficiaire Nette</h4>
-              <p style={{ fontSize: '1.8rem', fontWeight: 800, color: '#fff' }}>+ 99 % de Marge</p>
-              <p style={{ color: '#a0a0b5', fontSize: '0.85rem', marginTop: '8px' }}>
-                Votre plateforme SaaS conserve quasiment l'intégralité de ses revenus sous forme de bénéfice net !
-              </p>
-            </div>
+          <div className={styles.statCard} style={{ background: 'rgba(245, 158, 11, 0.1)', borderColor: 'rgba(245, 158, 11, 0.3)' }}>
+            <h4 style={{ color: '#fbbf24', fontSize: '1.1rem', marginBottom: '8px' }}>Marge Bénéficiaire Nette</h4>
+            <p style={{ fontSize: '1.8rem', fontWeight: 800, color: '#fff' }}>+ 99 % de Marge</p>
+            <p style={{ color: '#a0a0b5', fontSize: '0.85rem', marginTop: '8px' }}>
+              Votre plateforme SaaS conserve quasiment l'intégralité de ses revenus sous forme de bénéfice net !
+            </p>
+          </div>
           </div>
         </div>
       )}
@@ -407,7 +407,7 @@ export default function AdminDashboard() {
       {showAddModal && (
         <div className={styles.modalOverlay} onClick={() => setShowAddModal(false)}>
           <div className={styles.modalCard} onClick={(e) => e.stopPropagation()}>
-            <button className={styles.modalClose} onClick={() => setShowAddModal(false)}>✕</button>
+            <button className={styles.modalClose} onClick={() => setShowAddModal(false)}>Fermer</button>
             <h3 style={{ fontSize: '1.3rem', fontWeight: 700, marginBottom: '1rem' }}>+ Ajouter un Photographe Abonné</h3>
             
             <form onSubmit={handleAddPhotographerSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>

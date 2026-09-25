@@ -16,7 +16,7 @@ const testEvent = {
   coverImage: 'https://picsum.photos/seed/test123/1200/600',
   status: 'active',
   posts: [
-    { id: 1, userId: 1, username: 'jplumba', avatar: 'https://i.pravatar.cc/300?img=11', text: 'Bienvenue sur le Social Wall ! 🎉', createdAt: new Date().toISOString() },
+    { id: 1, userId: 1, username: 'jplumba', avatar: 'https://i.pravatar.cc/300?img=11', text: 'Bienvenue sur le Social Wall !', createdAt: new Date().toISOString() },
     { id: 2, userId: 2, username: 'mariem', avatar: 'https://i.pravatar.cc/300?img=5', text: 'Super fonctionnalité !', createdAt: new Date(Date.now() - 3600000).toISOString() },
   ]
 };

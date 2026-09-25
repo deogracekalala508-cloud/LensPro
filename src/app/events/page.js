@@ -28,7 +28,7 @@ export default function EventsPage() {
         participant_count: 2,
         post_count: 2,
         posts: [
-          { id: 1, userId: 1, username: 'jplumba', avatar: 'https://i.pravatar.cc/300?img=11', text: 'Prêt pour le Gala de ce soir ! 🎉', createdAt: new Date(Date.now() - 3600000).toISOString() },
+          { id: 1, userId: 1, username: 'jplumba', avatar: 'https://i.pravatar.cc/300?img=11', text: 'Prêt pour le Gala de ce soir !', createdAt: new Date(Date.now() - 3600000).toISOString() },
           { id: 2, userId: 2, username: 'mariem', avatar: 'https://i.pravatar.cc/300?img=5', text: 'J\'arrive bientôt !', createdAt: new Date(Date.now() - 1800000).toISOString() },
         ]
       },

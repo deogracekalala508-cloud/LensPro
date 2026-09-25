@@ -23,10 +23,10 @@ export default function Dashboard() {
 
   const user = getStoredUser();
   const stats = [
-    { label: t('dashboard.totalPhotos', 'Total Photos'), value: '2,405', trend: '+12%', icon: '📸', color: '#6B21A8' },
-    { label: t('dashboard.totalViews', 'Total Vues'), value: '45.2k', trend: '+8%', icon: '👁️', color: '#2563EB' },
-    { label: t('dashboard.totalLikes', 'Total Likes'), value: '12.8k', trend: '+24%', icon: '❤️', color: '#db2777' },
-    { label: t('dashboard.totalDownloads', 'Téléchargements'), value: '3,840', trend: '+5%', icon: '⬇️', color: '#0D9488' },
+    { label: t('dashboard.totalPhotos', 'Total Photos'), value: '2,405', trend: '+12%', color: '#6B21A8' },
+    { label: t('dashboard.totalViews', 'Total Vues'), value: '45.2k', trend: '+8%', color: '#2563EB' },
+    { label: t('dashboard.totalLikes', 'Total Likes'), value: '12.8k', trend: '+24%', color: '#db2777' },
+    { label: t('dashboard.totalDownloads', 'Téléchargements'), value: '3,840', trend: '+5%', color: '#0D9488' },
   ];
 
   const userName = user.name || user.fullName || 'Deogratias';
@@ -35,7 +35,7 @@ export default function Dashboard() {
     <div className={styles.dashboard}>
       <header className={styles.header}>
         <div>
-          <h1 className={styles.greeting}>{t('dashboard.welcome', 'Bienvenue')}, {userName} 👋</h1>
+          <h1>{t('dashboard.welcome', 'Bienvenue')}, {userName}</h1>
           <p className={styles.subtitle}>{t('dashboard.subtitle', 'Voici un aperçu de votre activité aujourd\'hui.')}</p>
         </div>
       </header>
@@ -69,7 +69,7 @@ export default function Dashboard() {
               <div key={gallery.id} className={styles.galleryCard}>
                 <div className={styles.galleryCover} style={{ backgroundImage: `url(${gallery.cover})` }}>
                   <div className={styles.galleryOverlay}>
-                    <button className={styles.actionBtn}>🔗</button>
+                    <button className={styles.actionBtn} title="Lien de partage">Partager</button>
                   </div>
                 </div>
                 <div className={styles.galleryInfo}>
@@ -86,17 +86,17 @@ export default function Dashboard() {
 
           <div className={styles.quickActions}>
             <Link href="/dashboard/upload" className={styles.quickActionCard}>
-              <span className={styles.qaIcon}>⬆️</span>
+              <span className={styles.qaIcon}>Upload</span>
               <h3>Upload Photos</h3>
               <p>Ajouter à votre portfolio</p>
             </Link>
             <Link href="/dashboard/galleries/new" className={styles.quickActionCard}>
-              <span className={styles.qaIcon}>➕</span>
+              <span className={styles.qaIcon}>Nouveau</span>
               <h3>Nouvelle Galerie</h3>
               <p>Créer pour un client</p>
             </Link>
             <Link href="/portfolio" className={styles.quickActionCard}>
-              <span className={styles.qaIcon}>🌐</span>
+              <span className={styles.qaIcon}>Portfolio</span>
               <h3>Voir Portfolio</h3>
               <p>Votre site public</p>
             </Link>

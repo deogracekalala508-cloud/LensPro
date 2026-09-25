@@ -130,9 +130,9 @@ export default function BrowseEvents({ events = [], userId, isPhotographer, t })
               </div>
               {event.description && <p className={styles.description}>{event.description}</p>}
               <div className={styles.meta}>
-                <span>👥 {event.participant_count} participants</span>
+                <span>{event.participant_count} participants</span>
                 <span>•</span>
-                <span>📸 {event.post_count} memories</span>
+                <span>{event.post_count} memories</span>
               </div>
               <div className={styles.actions}>
                 <Link href={`/event/${event.share_code}`} className={styles.viewBtn}>

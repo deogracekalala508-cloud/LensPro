@@ -50,14 +50,14 @@ export default function Galleries() {
               </div>
               
               <div className={styles.stats}>
-                <span>👁️ {gallery.views} vues</span>
+                <span>{gallery.views} vues</span>
               </div>
 
               <div className={styles.actions}>
-                <button className={styles.actionBtn} title="Copier le lien">🔗</button>
-                <button className={styles.actionBtn} title="QR Code">📱</button>
-                <button className={styles.actionBtn} title="Modifier">✏️</button>
-                <button className={`${styles.actionBtn} ${styles.deleteBtn}`} title="Supprimer">🗑️</button>
+                <button className={styles.actionBtn} title="Copier le lien">Lien</button>
+                <button className={styles.actionBtn} title="QR Code">QR</button>
+                <button className={styles.actionBtn} title="Modifier">Modifier</button>
+                <button className={`${styles.actionBtn} ${styles.deleteBtn}`} title="Supprimer">Supprimer</button>
               </div>
             </div>
           </div>

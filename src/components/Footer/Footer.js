@@ -42,7 +42,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="wa-btn"
             >
-              💬 Nous contacter sur WhatsApp
+              Nous contacter sur WhatsApp
             </a>
           </div>
         </div>

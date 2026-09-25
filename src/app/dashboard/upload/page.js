@@ -26,7 +26,7 @@ export default function UploadPage() {
         onDrop={handleDrop}
       >
         <div className={styles.dropzoneContent}>
-          <span className={styles.uploadIcon}>⬆️</span>
+          <span className={styles.uploadIcon}>Upload</span>
           <h3>Glissez-déposez vos photos ici</h3>
           <p>ou</p>
           <button className={styles.browseBtn}>Parcourir les fichiers</button>

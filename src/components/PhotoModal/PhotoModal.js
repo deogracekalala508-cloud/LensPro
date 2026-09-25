@@ -24,7 +24,7 @@ const PhotoModal = ({ photo, onClose, onPrev, onNext, t }) => {
   return (
     <div className="photo-modal-overlay" onClick={onClose}>
       <div className="photo-modal-content" onClick={(e) => e.stopPropagation()}>
-        <button className="photo-modal-close" onClick={onClose} aria-label={t('close', 'Fermer')}>✕</button>
+        <button className="photo-modal-close" onClick={onClose} aria-label={t('close', 'Fermer')}>Fermer</button>
         
         {onPrev && (
           <button className="photo-modal-nav prev" onClick={onPrev} aria-label={t('prev', 'Précédent')}>
@@ -50,10 +50,10 @@ const PhotoModal = ({ photo, onClose, onPrev, onNext, t }) => {
                 className={`action-btn like-btn ${isLiked ? 'liked' : ''}`}
                 onClick={() => setIsLiked(!isLiked)}
               >
-                {isLiked ? '♥' : '♡'} <span>{photo.likes || 0}</span>
+                {isLiked ? 'Like' : 'Like'} <span>{photo.likes || 0}</span>
               </button>
               <button className="action-btn download-btn">
-                ↓ {t('download', 'Télécharger')}
+                Télécharger
               </button>
             </div>
           </div>
@@ -67,7 +67,7 @@ const PhotoModal = ({ photo, onClose, onPrev, onNext, t }) => {
               </div>
             )}
             <div className="photo-stats">
-              <span>👁 {photo.views || 0} {t('views', 'vues')}</span>
+              <span>{photo.views || 0} {t('views', 'vues')}</span>
             </div>
           </div>
         </div>

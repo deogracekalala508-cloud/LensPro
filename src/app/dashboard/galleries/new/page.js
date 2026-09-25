@@ -43,7 +43,7 @@ export default function NewGallery() {
 
         <div className={styles.uploadSection}>
           <div className={styles.dropzone}>
-            <span className={styles.uploadIcon}>📸</span>
+            <span className={styles.uploadIcon}>Upload</span>
             <h3>Glissez-déposez vos photos ici</h3>
             <p>ou cliquez pour parcourir</p>
           </div>

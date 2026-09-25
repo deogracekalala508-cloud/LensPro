@@ -37,7 +37,7 @@ export default function Navbar() {
             className="lang-toggle"
             title="Changer de langue / Change language"
           >
-            🌐 {language === 'fr' ? 'EN' : 'FR'}
+            {language === 'fr' ? 'EN' : 'FR'}
           </button>
         </nav>
         <button className={`hamburger ${isOpen ? 'open' : ''}`} onClick={() => setIsOpen(!isOpen)} aria-label="Toggle Menu">

@@ -87,9 +87,9 @@ export const mockStats = {
 };
 
 export const mockActivity = [
-  { id: 1, icon: '❤️', user: 'Marie M.', action: 'a aimé', target: 'votre photo "Coucher de soleil Goma"', time: 'Il y a 5 min' },
-  { id: 2, icon: '⬇️', user: 'Client Galerie "Mariage Sarah"', action: 'a téléchargé', target: '12 photos', time: 'Il y a 2 heures' },
-  { id: 3, icon: '👁️', user: 'Votre portfolio', action: 'a dépassé', target: 'les 1 000 vues cette semaine', time: 'Hier' }
+  { id: 1, icon: 'like', user: 'Marie M.', action: 'a aimé', target: 'votre photo "Coucher de soleil Goma"', time: 'Il y a 5 min' },
+  { id: 2, icon: 'download', user: 'Client Galerie "Mariage Sarah"', action: 'a téléchargé', target: '12 photos', time: 'Il y a 2 heures' },
+  { id: 3, icon: 'view', user: 'Votre portfolio', action: 'a dépassé', target: 'les 1 000 vues cette semaine', time: 'Hier' }
 ];
 
 export const mockAdminStats = {
@@ -115,7 +115,7 @@ export const mockEvents = [
     coverImage: 'https://picsum.photos/seed/gala2026/1200/600',
     status: 'active',
     posts: [
-      { id: 1, userId: 1, username: 'jplumba', avatar: 'https://i.pravatar.cc/300?img=11', text: 'Prêt pour le Gala de ce soir ! 🎉', createdAt: new Date(Date.now() - 3600000).toISOString() },
+      { id: 1, userId: 1, username: 'jplumba', avatar: 'https://i.pravatar.cc/300?img=11', text: 'Prêt pour le Gala de ce soir !', createdAt: new Date(Date.now() - 3600000).toISOString() },
       { id: 2, userId: 2, username: 'mariem', avatar: 'https://i.pravatar.cc/300?img=5', text: 'J\'arrive bientôt !', createdAt: new Date(Date.now() - 1800000).toISOString() },
     ]
   },

@@ -9,10 +9,10 @@ export default function AdminLayout({ children }) {
   const pathname = usePathname();
 
   const navLinks = [
-    { href: '/admin', label: 'Vue d\'ensemble', icon: '📊' },
-    { href: '/admin/photographers', label: 'Photographes', icon: '👥' },
-    { href: '/admin/subscriptions', label: 'Abonnements', icon: '💳' },
-    { href: '/admin/settings', label: 'Paramètres', icon: '⚙️' },
+    { href: '/admin', label: 'Vue d\'ensemble' },
+    { href: '/admin/photographers', label: 'Photographes' },
+    { href: '/admin/subscriptions', label: 'Abonnements' },
+    { href: '/admin/settings', label: 'Paramètres' },
   ];
 
   return (
@@ -21,7 +21,7 @@ export default function AdminLayout({ children }) {
         className={styles.mobileToggle} 
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
       >
-        {isSidebarOpen ? '✕' : '☰'}
+        {isSidebarOpen ? 'Fermer' : 'Menu'}
       </button>
 
       <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.open : ''}`}>
@@ -45,7 +45,6 @@ export default function AdminLayout({ children }) {
                 onClick={() => setIsSidebarOpen(false)}
                 style={isActive ? { background: 'linear-gradient(135deg, rgba(248, 113, 113, 0.2), rgba(251, 146, 60, 0.2))', borderColor: 'rgba(248, 113, 113, 0.3)' } : {}}
               >
-                <span className={styles.navIcon}>{link.icon}</span>
                 {link.label}
               </Link>
             );

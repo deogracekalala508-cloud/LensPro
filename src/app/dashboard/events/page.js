@@ -73,9 +73,9 @@ export default function DashboardEvents() {
                 <h3>{event.title}</h3>
                 {event.description && <p>{event.description}</p>}
                 <div className={styles.meta}>
-                  <span>👥 {event.participant_count || 0} {t.events.participants || 'participants'}</span>
+                  <span>{event.participant_count || 0} {t.events.participants || 'participants'}</span>
                   <span>•</span>
-                  <span>📸 {event.post_count || 0} {t.events.memories || 'souvenirs'}</span>
+                  <span>{event.post_count || 0} {t.events.memories || 'souvenirs'}</span>
                   <span>•</span>
                   <span>Créé le {formatDate(event.created_at)}</span>
                 </div>
@@ -86,10 +86,10 @@ export default function DashboardEvents() {
                 )}
                 <div className={styles.actions}>
                   <Link href={`/event/${event.share_code}`} className={styles.viewBtn}>
-                    👁 {t.events.view || 'Voir'}
+                    {t.events.view || 'Voir'}
                   </Link>
                   <Link href={`/event/${event.share_code}/giant`} className={styles.giantBtn}>
-                    🖥 {t.events.giantScreen || 'Écran'}
+                    {t.events.giantScreen || 'Écran'}
                   </Link>
                 </div>
               </div>

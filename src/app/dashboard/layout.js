@@ -11,11 +11,11 @@ export default function DashboardLayout({ children }) {
   const { t } = useLanguage();
 
   const navLinks = [
-    { href: '/dashboard', label: t('nav.overview', 'Vue d\'ensemble'), icon: '📊' },
-    { href: '/dashboard/galleries', label: t('nav.galleries', 'Mes Galeries'), icon: '🖼️' },
-    { href: '/dashboard/upload', label: t('nav.upload', 'Upload'), icon: '⬆️' },
-    { href: '/dashboard/analytics', label: t('nav.analytics', 'Analytiques'), icon: '📈' },
-    { href: '/dashboard/settings', label: t('nav.settings', 'Paramètres'), icon: '⚙️' },
+    { href: '/dashboard', label: t('nav.overview', 'Vue d\'ensemble') },
+    { href: '/dashboard/galleries', label: t('nav.galleries', 'Mes Galeries') },
+    { href: '/dashboard/upload', label: t('nav.upload', 'Upload') },
+    { href: '/dashboard/analytics', label: t('nav.analytics', 'Analytiques') },
+    { href: '/dashboard/settings', label: t('nav.settings', 'Paramètres') },
   ];
 
   return (
@@ -24,7 +24,7 @@ export default function DashboardLayout({ children }) {
         className={styles.mobileToggle} 
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
       >
-        {isSidebarOpen ? '✕' : '☰'}
+        {isSidebarOpen ? 'Fermer' : 'Menu'}
       </button>
 
       <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.open : ''}`}>
@@ -44,7 +44,6 @@ export default function DashboardLayout({ children }) {
                 className={`${styles.navLink} ${isActive ? styles.active : ''}`}
                 onClick={() => setIsSidebarOpen(false)}
               >
-                <span className={styles.navIcon}>{link.icon}</span>
                 {link.label}
               </Link>
             );

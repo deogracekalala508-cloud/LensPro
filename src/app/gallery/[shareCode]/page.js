@@ -127,22 +127,22 @@ export default function ClientGalleryPage({ params }) {
         <div className="gallery-toolbar">
           <div className="toolbar-left">
             <button 
-              className={`filter-btn ${showFavoritesOnly ? 'active' : ''}`}
-              onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
+            className={`filter-btn ${showFavoritesOnly ? 'active' : ''}`}
+            onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
             >
-              ♥ {t('favorites', 'Favoris')} ({favorites.size})
+            Favoris ({favorites.size})
             </button>
           </div>
           
           <div className="toolbar-right">
-            {selectedPhotos.size > 0 && (
-              <button className="btn-download-selected">
-                ↓ {t('download_selection', 'Télécharger la sélection')} ({selectedPhotos.size})
-              </button>
-            )}
-            <button className="btn-download-all">
-              ↓ {t('download_all', 'Tout télécharger')}
+          {selectedPhotos.size > 0 && (
+            <button className="btn-download-selected">
+              Télécharger la sélection ({selectedPhotos.size})
             </button>
+          )}
+          <button className="btn-download-all">
+            Tout télécharger
+          </button>
           </div>
         </div>
       </div>
@@ -173,13 +173,13 @@ export default function ClientGalleryPage({ params }) {
                     className={`fav-btn ${favorites.has(photo.id) ? 'active' : ''}`}
                     onClick={(e) => toggleFavorite(photo.id, e)}
                   >
-                    {favorites.has(photo.id) ? '♥' : '♡'}
+                    {favorites.has(photo.id) ? 'Favori' : 'Ajouter'}
                   </button>
                 </div>
                 
                 <div className="overlay-bottom">
                   <button className="single-download-btn" onClick={(e) => { e.stopPropagation(); /* download logic */ }}>
-                    ↓
+                    Télécharger
                   </button>
                 </div>
               </div>
@@ -196,7 +196,7 @@ export default function ClientGalleryPage({ params }) {
       {/* Simple Lightbox */}
       {lightboxPhoto && (
         <div className="lightbox-overlay" onClick={() => setLightboxPhoto(null)}>
-          <button className="lightbox-close">✕</button>
+          <button className="lightbox-close">Fermer</button>
           <img src={lightboxPhoto.url} alt="" className="lightbox-img" onClick={e => e.stopPropagation()} />
         </div>
       )}

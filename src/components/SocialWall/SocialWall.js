@@ -226,9 +226,9 @@ export default function SocialWall({ shareCode, isAdmin = false }) {
           <h1>{event.title}</h1>
           {event.description && <p className={styles.description}>{event.description}</p>}
           <div className={styles.meta}>
-            <span>👥 {event.participant_count} participants</span>
+            <span>{event.participant_count} participants</span>
             <span>•</span>
-            <span>📸 {event.post_count} memories</span>
+            <span>{event.post_count} memories</span>
             {event.expires_at && (
               <>
                 <span>•</span>
@@ -269,7 +269,7 @@ export default function SocialWall({ shareCode, isAdmin = false }) {
                   className={styles.fileInputHidden}
                 />
                 <button type="button" className={styles.fileBtn}>
-                  📷 Photo / Video
+                  Photo / Video
                 </button>
                 {selectedFile && (
                   <button 
@@ -280,7 +280,7 @@ export default function SocialWall({ shareCode, isAdmin = false }) {
                       fileInputRef.current.value = ''
                     }}
                   >
-                    ✕
+                    Fermer
                   </button>
                 )}
               </div>
@@ -292,7 +292,7 @@ export default function SocialWall({ shareCode, isAdmin = false }) {
                   className={styles.audioBtn}
                   disabled={isUploading}
                 >
-                  🎤 Voice message
+                  Voice message
                 </button>
               </div>
 
@@ -343,7 +343,7 @@ export default function SocialWall({ shareCode, isAdmin = false }) {
                     className={styles.expandBtn}
                     onClick={() => setModalImage(post.content_url)}
                   >
-                    👁 View
+                    View
                   </button>
                 </div>
               )}
@@ -357,17 +357,17 @@ export default function SocialWall({ shareCode, isAdmin = false }) {
               {post.content_type === 'audio' && post.audio_url && (
                 <div className={styles.postAudio}>
                   <audio src={post.audio_url} controls className={styles.audioPlayer} />
-                  <span className={styles.audioLabel}>🎤 Voice message</span>
+                  <span className={styles.audioLabel}>Voice message</span>
                 </div>
               )}
 
               {isModerator && (
                 <div className={styles.moderation}>
                   <button 
-                    onClick={() => handleDeletePost(post.id)}
-                    className={styles.deleteBtn}
+                  onClick={() => handleDeletePost(post.id)}
+                  className={styles.deleteBtn}
                   >
-                    🗑 Delete
+                  Delete
                   </button>
                 </div>
               )}
@@ -384,7 +384,7 @@ export default function SocialWall({ shareCode, isAdmin = false }) {
               className={styles.modalClose}
               onClick={() => setShowModal(false)}
             >
-              ✕
+              Fermer
             </button>
           </div>
         </div>
