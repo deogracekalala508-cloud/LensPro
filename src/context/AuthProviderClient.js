@@ -5,7 +5,7 @@
 
 import { useContext, useState, useEffect, useCallback } from 'react';
 import { supabase } from '../lib/supabase';
-import { AuthContext } from './AuthContext';
+import AuthContext from './AuthContext';
 
 // Détecte si Supabase est disponible
 const hasSupabase = typeof supabase !== 'undefined' && supabase !== null;
@@ -56,11 +56,6 @@ export function AuthProviderClient({ children }) {
 
     return () => { mounted = false; };
   }, []);
-
-  // Ne rendre les enfants qu'une fois l'authentification initialisée
-  if (loading) {
-    return null;
-  }
 
   const signIn = useCallback(async (email, password) => {
     if (!hasSupabase) {
@@ -117,6 +112,11 @@ export function AuthProviderClient({ children }) {
     setUser(null);
     return { success: true };
   }, []);
+
+  // Ne rendre les enfants qu'une fois l'authentification initialisée
+  if (loading) {
+    return null;
+  }
 
   const value = {
     user,
