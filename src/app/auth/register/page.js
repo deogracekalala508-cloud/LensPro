@@ -84,14 +84,17 @@ export default function RegisterPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (step < 3) {
-      // Lire les valeurs depuis le DOM pour les steps cachés
+      // Lire les valeurs depuis le DOM pour tous les champs
       const fullName = document.querySelector('input[name="fullName"]')?.value || formData.fullName;
       const email = document.querySelector('input[name="email"]')?.value || formData.email;
       const password = document.querySelector('input[name="password"]')?.value || formData.password;
       const confirmPassword = document.querySelector('input[name="confirmPassword"]')?.value || formData.confirmPassword;
+      const username = document.querySelector('input[name="username"]')?.value || formData.username;
+      const city = document.querySelector('input[name="city"]')?.value || formData.city;
+      const specialty = document.querySelector('select[name="specialty"]')?.value || formData.specialty;
 
       // Mettre à jour l'état React pour la confirmation
-      setFormData(prev => ({ ...prev, fullName, email, password, confirmPassword }));
+      setFormData(prev => ({ ...prev, fullName, email, password, confirmPassword, username, city, specialty }));
 
       nextStep();
       return;
