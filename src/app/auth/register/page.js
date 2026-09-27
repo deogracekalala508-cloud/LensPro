@@ -136,57 +136,58 @@ export default function RegisterPage() {
           </div>
 
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-            {step === 1 && (
-              <div className="step-container">
-                <h3 style={{ marginBottom: '1.5rem', textAlign: 'center', color: '#a1a1aa', fontWeight: 500 }}>{curr.s1Title}</h3>
+            {/* Les inputs sont toujours dans le DOM pour que FormData les capture */}
+
+            {/* Champ step 1 : informations personnelles */}
+            <div style={{ display: step <= 1 ? 'block' : 'none', position: step > 1 ? 'absolute' : 'static', visibility: step > 1 ? 'hidden' : 'visible', pointerEvents: step > 1 ? 'none' : 'auto', width: '100%', paddingBottom: '1rem' }}>
+              <h3 style={{ marginBottom: '1.5rem', textAlign: 'center', color: '#a1a1aa', fontWeight: 500 }}>{curr.s1Title}</h3>
+              <div className="register-form-group">
+                <label className="register-label">{curr.fullName}</label>
+                <input type="text" name="fullName" defaultValue={formData.fullName} onChange={handleChange} className="register-input" required />
+              </div>
+              <div className="register-form-group">
+                <label className="register-label">{curr.email}</label>
+                <input type="email" name="email" defaultValue={formData.email} onChange={handleChange} className="register-input" required />
+              </div>
+              <div className="form-row">
                 <div className="register-form-group">
-                  <label className="register-label">{curr.fullName}</label>
-                  <input type="text" name="fullName" defaultValue={formData.fullName} onChange={handleChange} className="register-input" required />
+                  <label className="register-label">{curr.password}</label>
+                  <input type="password" name="password" defaultValue={formData.password} onChange={handleChange} className="register-input" required />
                 </div>
                 <div className="register-form-group">
-                  <label className="register-label">{curr.email}</label>
-                  <input type="email" name="email" defaultValue={formData.email} onChange={handleChange} className="register-input" required />
-                </div>
-                <div className="form-row">
-                  <div className="register-form-group">
-                    <label className="register-label">{curr.password}</label>
-                    <input type="password" name="password" defaultValue={formData.password} onChange={handleChange} className="register-input" required />
-                  </div>
-                  <div className="register-form-group">
-                    <label className="register-label">{curr.confirmPass}</label>
-                    <input type="password" name="confirmPassword" defaultValue={formData.confirmPassword} onChange={handleChange} className="register-input" required />
-                  </div>
+                  <label className="register-label">{curr.confirmPass}</label>
+                  <input type="password" name="confirmPassword" defaultValue={formData.confirmPassword} onChange={handleChange} className="register-input" required />
                 </div>
               </div>
-            )}
+            </div>
 
-            {step === 2 && (
-              <div className="step-container">
-                <h3 style={{ marginBottom: '1.5rem', textAlign: 'center', color: '#a1a1aa', fontWeight: 500 }}>{curr.s2Title}</h3>
-                <div className="register-form-group">
-                  <label className="register-label">{curr.username}</label>
-                  <input type="text" name="username" defaultValue={formData.username} onChange={handleChange} className="register-input" required />
-                </div>
-                <div className="register-form-group">
-                  <label className="register-label">{curr.city}</label>
-                  <input type="text" name="city" defaultValue={formData.city} onChange={handleChange} className="register-input" required />
-                </div>
-                <div className="register-form-group">
-                  <label className="register-label">{curr.specialty}</label>
-                  <select name="specialty" defaultValue={formData.specialty} onChange={handleChange} className="register-select" required>
-                    <option value="">Sélectionnez...</option>
-                    {curr.specOpts.map((opt) => (
-                      <option key={opt} value={opt}>{opt}</option>
-                    ))}
-                  </select>
-                </div>
+            {/* Champ step 2 : détails du profil */}
+            <div style={{ display: step <= 2 ? 'block' : 'none', position: step > 2 ? 'absolute' : 'static', visibility: step > 2 ? 'hidden' : 'visible', pointerEvents: step > 2 ? 'none' : 'auto', width: '100%', paddingBottom: '1rem' }}>
+              <h3 style={{ marginBottom: '1.5rem', textAlign: 'center', color: '#a1a1aa', fontWeight: 500 }}>{curr.s2Title}</h3>
+              <div className="register-form-group">
+                <label className="register-label">{curr.username}</label>
+                <input type="text" name="username" defaultValue={formData.username} onChange={handleChange} className="register-input" required />
               </div>
-            )}
+              <div className="register-form-group">
+                <label className="register-label">{curr.city}</label>
+                <input type="text" name="city" defaultValue={formData.city} onChange={handleChange} className="register-input" required />
+              </div>
+              <div className="register-form-group">
+                <label className="register-label">{curr.specialty}</label>
+                <select name="specialty" defaultValue={formData.specialty} onChange={handleChange} className="register-select" required>
+                  <option value="">Sélectionnez...</option>
+                  {curr.specOpts.map((opt) => (
+                    <option key={opt} value={opt}>{opt}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
 
+            {/* Étape 3 : confirmation (inputs step 1 et 2 sont cachés mais présents dans le DOM) */}
             {step === 3 && (
               <div className="step-container">
                 <h3 style={{ marginBottom: '1.5rem', textAlign: 'center', color: '#a1a1aa', fontWeight: 500 }}>{curr.s3Title}</h3>
-                \n                <div className="summary-card">
+                <div className="summary-card">
                   <div className="summary-item">
                     <span className="summary-label">{curr.fullName}</span>
                     <span className="summary-value">{formData.fullName || '—'}</span>
@@ -204,7 +205,6 @@ export default function RegisterPage() {
                     <span className="summary-value">{formData.city || '—'}</span>
                   </div>
                 </div>
-
                 <div className="checkbox-group">
                   <input type="checkbox" name="acceptedTerms" defaultChecked={formData.acceptedTerms} onChange={handleChange} required />
                   <label className="checkbox-label">
