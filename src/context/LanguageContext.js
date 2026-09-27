@@ -37,9 +37,20 @@ export const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState('fr');
 
   useEffect(() => {
-    const storedLang = typeof window !== 'undefined' ? localStorage.getItem('lenspro_lang') : null;
-    if (storedLang && translations[storedLang]) {
-      setLanguage(storedLang);
+    // Initialisation côté client uniquement pour éviter le bailout CSR
+    const initLanguage = () => {
+      const storedLang = localStorage.getItem('lenspro_lang');
+      if (storedLang && translations[storedLang]) {
+        setLanguage(storedLang);
+      }
+    };
+
+    if (typeof window !== 'undefined') {
+      try {
+        initLanguage();
+      } catch (e) {
+        // Fallback - garder la langue par défaut
+      }
     }
   }, []);
 

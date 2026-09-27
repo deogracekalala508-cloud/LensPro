@@ -44,6 +44,7 @@ export async function createEvent({ title, description, pinCode, expiresAt, user
       pin_code: pinCode || null,
       share_code: shareCode,
       user_id: userId,
+      created_by: userId, // both columns required in production (created_by NOT NULL FK)
       cover_image_url: coverImageUrl || null,
       expires_at: expiresAt ? new Date(expiresAt).toISOString() : null,
       status: EventStatus.ACTIVE

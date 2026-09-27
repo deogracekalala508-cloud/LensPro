@@ -1,18 +1,27 @@
 import { Inter } from 'next/font/google';
-import { LanguageProvider } from '../context/LanguageContext';
-import { DemoProvider } from '../context/DemoContext';
+import dynamic from 'next/dynamic';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
-import dynamic from 'next/dynamic';
 import './globals.css';
 
-// AuthProviderClient est un Client Component - on le charge côté client uniquement
+const inter = Inter({ subsets: ['latin'] });
+
+// AuthProviderClient est un Client Component avec état - on le charge côté client
 const AuthProviderClientDynamic = dynamic(() => import('../context/AuthProviderClient').then(mod => ({ default: mod.AuthProviderClient })), {
   ssr: false,
-  loading: () => null
+  loading: () => <div style={{ padding: '2rem', textAlign: 'center', color: '#666' }}>Chargement...</div>
 });
 
-const inter = Inter({ subsets: ['latin'] });
+// LanguageProvider et DemoProvider évitent le bailout CSR grâce à dynamic import avec ssr: false
+const LanguageProviderDynamic = dynamic(() => import('../context/LanguageContext').then(mod => ({ default: mod.LanguageProvider })), {
+  ssr: false,
+  loading: () => <div style={{ padding: '2rem', textAlign: 'center', color: '#666' }}>Chargement...</div>
+});
+
+const DemoProviderDynamic = dynamic(() => import('../context/DemoContext').then(mod => ({ default: mod.DemoProvider })), {
+  ssr: false,
+  loading: () => <div style={{ padding: '2rem', textAlign: 'center', color: '#666' }}>Chargement...</div>
+});
 
 export const metadata = {
   title: 'LensPro — Votre vitrine photo professionnelle',
@@ -23,8 +32,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fr">
       <body className={inter.className}>
-        <LanguageProvider>
-          <DemoProvider>
+        <LanguageProviderDynamic>
+          <DemoProviderDynamic>
             <AuthProviderClientDynamic>
               <Navbar />
               <main className="main-content">
@@ -32,8 +41,8 @@ export default function RootLayout({ children }) {
               </main>
               <Footer />
             </AuthProviderClientDynamic>
-          </DemoProvider>
-        </LanguageProvider>
+          </DemoProviderDynamic>
+        </LanguageProviderDynamic>
       </body>
     </html>
   );

@@ -33,9 +33,13 @@ export default function AdminDashboard() {
   const [newPCity, setNewPCity] = useState('Kinshasa');
   const [newPSpec, setNewPSpec] = useState('Mariage');
 
+  const ADMIN_PASSCODES = [
+    process.env.ADMIN_PASSCODE || ''
+  ].filter(Boolean);
+
   const handleAdminLogin = (e) => {
     e.preventDefault();
-    if (passcode === 'admin123' || passcode === 'admin' || passcode === '1234') {
+    if (ADMIN_PASSCODES.includes(passcode)) {
       setIsAdminAuthenticated(true);
       setPassError(false);
     } else {

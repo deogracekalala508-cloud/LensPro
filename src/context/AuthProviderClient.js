@@ -136,8 +136,9 @@ export function AuthProviderClient({ children }) {
 
 export function useAuth() {
   const context = useContext(AuthContext);
+  // Pendant le SSR ou si le contexte n'est pas disponible, retourner null au lieu de throw
   if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    return { user: null, loading: false, signIn: async () => ({ success: false }), signUp: async () => ({ success: false }), signOut: async () => ({ success: true }), hasSupabase: false };
   }
   return context;
 }

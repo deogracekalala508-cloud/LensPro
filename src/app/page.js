@@ -5,6 +5,10 @@ import Link from 'next/link';
 import './page.css';
 import { useLanguage } from '@/context/LanguageContext';
 import { useDemo } from '@/context/DemoContext';
+import {
+  IconPortfolio, IconGallery, IconSocial, IconBeforeAfter,
+  IconQRCode, IconAnalytics, IconWatermark, IconMobileMoney
+} from '@/components/Icons/Icons';
 
 export default function LandingPage() {
   const { t } = useLanguage();
@@ -93,14 +97,14 @@ export default function LandingPage() {
           </div>
           
           <div className="features-grid">
-            <FeatureCard icon="P" title="Portfolio Public" desc="Exposez vos plus belles photos au monde entier avec une vitrine élégante." />
-            <FeatureCard icon="G" title="Galeries Privées Clients" desc="Livrez les photos de vos événements en qualité originale sans aucune compression WhatsApp." />
-            <FeatureCard icon="S" title="Réseau Social Photographes" desc="Rejoignez la communauté, échangez des likes et gagnez en visibilité." />
-            <FeatureCard icon="B" title="Slider Avant / Après" desc="Montrez la puissance de votre travail de retouche avec un comparateur interactif." />
-            <FeatureCard icon="Q" title="QR Code Événement" desc="Générez un QR code pour vos événements. Les invités scannent et accèdent aux photos." />
-            <FeatureCard icon="A" title="Analytiques Avancés" desc="Suivez en direct vos vues, likes et téléchargements clients." />
-            <FeatureCard icon="F" title="Filigrane Automatique" desc="Protégez vos photos publiques contre le vol avec un filigrane personnalisable." />
-            <FeatureCard icon="M" title="Paiement Mobile Money" desc="Abonnez-vous facilement via Airtel Money et Orange Money avec activation rapide." />
+            <FeatureCard icon={<IconPortfolio style={{ color: '#6B21A8' }} />} title="Portfolio Public" desc="Exposez vos plus belles photos au monde entier avec une vitrine élégante." />
+            <FeatureCard icon={<IconGallery style={{ color: '#139986' }} />} title="Galeries Privées Clients" desc="Livrez les photos de vos événements en qualité originale sans aucune compression WhatsApp." />
+            <FeatureCard icon={<IconSocial style={{ color: '#2563EB' }} />} title="Réseau Social Photographes" desc="Rejoignez la communauté, échangez des likes et gagnez en visibilité." />
+            <FeatureCard icon={<IconBeforeAfter style={{ color: '#7C3AED' }} />} title="Slider Avant / Après" desc="Montrez la puissance de votre travail de retouche avec un comparateur interactif." />
+            <FeatureCard icon={<IconQRCode style={{ color: '#db2777' }} />} title="QR Code Événement" desc="Générez un QR code pour vos événements. Les invités scannent et accèdent aux photos." />
+            <FeatureCard icon={<IconAnalytics style={{ color: '#0D9488' }} />} title="Filigrane Automatique" desc="Protégez vos photos publiques contre le vol avec un filigrane personnalisable." />
+            <FeatureCard icon={<IconWatermark style={{ color: '#f59e0b' }} />} title="Analytiques Avancés" desc="Suivez en direct vos vues, likes et téléchargements clients." />
+            <FeatureCard icon={<IconMobileMoney style={{ color: '#10b981' }} />} title="Paiement Mobile Money" desc="Abonnez-vous facilement via Airtel Money et Orange Money avec activation rapide." />
           </div>
         </div>
       </section>

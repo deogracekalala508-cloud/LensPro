@@ -24,6 +24,7 @@ export default function RegisterPage() {
     specialty: '',
     acceptedTerms: false
   });
+  const [errors, setErrors] = useState({});
 
   const t = {
     fr: {
@@ -87,17 +88,31 @@ export default function RegisterPage() {
       return;
     }
 
-    if (formData.password !== formData.confirmPassword) {
+    // Lire les valeurs directement depuis le formulaire DOM (mode uncontrolled)
+    const form = e.target;
+    const fd = new FormData(form);
+    const formDataFromDom = {
+      fullName: fd.get('fullName') || formData.fullName,
+      username: fd.get('username') || formData.username,
+      email: fd.get('email') || formData.email,
+      password: fd.get('password') || formData.password,
+      confirmPassword: fd.get('confirmPassword') || formData.confirmPassword,
+      city: fd.get('city') || formData.city,
+      specialty: fd.get('specialty') || formData.specialty,
+      acceptedTerms: formData.acceptedTerms || formDataFromDom.acceptedTerms === 'on',
+    };
+
+    if (formDataFromDom.password !== formDataFromDom.confirmPassword) {
       alert(curr.confirmPass + ' ne correspond pas.');
       return;
     }
 
     setErrors({});
-    const result = await signUp(formData.email, formData.password, {
-      fullName: formData.fullName,
-      username: formData.username,
-      city: formData.city,
-      specialty: formData.specialty,
+    const result = await signUp(formDataFromDom.email, formDataFromDom.password, {
+      fullName: formDataFromDom.fullName,
+      username: formDataFromDom.username,
+      city: formDataFromDom.city,
+      specialty: formDataFromDom.specialty,
     });
     if (!result.success) {
       setErrors({ form: result.error || (hasSupabase ? 'Erreur d\'inscription' : 'Erreur inscription') });
@@ -126,20 +141,20 @@ export default function RegisterPage() {
                 <h3 style={{ marginBottom: '1.5rem', textAlign: 'center', color: '#a1a1aa', fontWeight: 500 }}>{curr.s1Title}</h3>
                 <div className="register-form-group">
                   <label className="register-label">{curr.fullName}</label>
-                  <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} className="register-input" required />
+                  <input type="text" name="fullName" defaultValue={formData.fullName} onChange={handleChange} className="register-input" required />
                 </div>
                 <div className="register-form-group">
                   <label className="register-label">{curr.email}</label>
-                  <input type="email" name="email" value={formData.email} onChange={handleChange} className="register-input" required />
+                  <input type="email" name="email" defaultValue={formData.email} onChange={handleChange} className="register-input" required />
                 </div>
                 <div className="form-row">
                   <div className="register-form-group">
                     <label className="register-label">{curr.password}</label>
-                    <input type="password" name="password" value={formData.password} onChange={handleChange} className="register-input" required />
+                    <input type="password" name="password" defaultValue={formData.password} onChange={handleChange} className="register-input" required />
                   </div>
                   <div className="register-form-group">
                     <label className="register-label">{curr.confirmPass}</label>
-                    <input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} className="register-input" required />
+                    <input type="password" name="confirmPassword" defaultValue={formData.confirmPassword} onChange={handleChange} className="register-input" required />
                   </div>
                 </div>
               </div>
@@ -150,15 +165,15 @@ export default function RegisterPage() {
                 <h3 style={{ marginBottom: '1.5rem', textAlign: 'center', color: '#a1a1aa', fontWeight: 500 }}>{curr.s2Title}</h3>
                 <div className="register-form-group">
                   <label className="register-label">{curr.username}</label>
-                  <input type="text" name="username" value={formData.username} onChange={handleChange} className="register-input" required />
+                  <input type="text" name="username" defaultValue={formData.username} onChange={handleChange} className="register-input" required />
                 </div>
                 <div className="register-form-group">
                   <label className="register-label">{curr.city}</label>
-                  <input type="text" name="city" value={formData.city} onChange={handleChange} className="register-input" required />
+                  <input type="text" name="city" defaultValue={formData.city} onChange={handleChange} className="register-input" required />
                 </div>
                 <div className="register-form-group">
                   <label className="register-label">{curr.specialty}</label>
-                  <select name="specialty" value={formData.specialty} onChange={handleChange} className="register-select" required>
+                  <select name="specialty" defaultValue={formData.specialty} onChange={handleChange} className="register-select" required>
                     <option value="">Sélectionnez...</option>
                     {curr.specOpts.map((opt) => (
                       <option key={opt} value={opt}>{opt}</option>
@@ -171,28 +186,27 @@ export default function RegisterPage() {
             {step === 3 && (
               <div className="step-container">
                 <h3 style={{ marginBottom: '1.5rem', textAlign: 'center', color: '#a1a1aa', fontWeight: 500 }}>{curr.s3Title}</h3>
-                
-                <div className="summary-card">
+                \n                <div className="summary-card">
                   <div className="summary-item">
                     <span className="summary-label">{curr.fullName}</span>
-                    <span className="summary-value">{formData.fullName}</span>
+                    <span className="summary-value">{formData.fullName || '—'}</span>
                   </div>
                   <div className="summary-item">
                     <span className="summary-label">{curr.email}</span>
-                    <span className="summary-value">{formData.email}</span>
+                    <span className="summary-value">{formData.email || '—'}</span>
                   </div>
                   <div className="summary-item">
                     <span className="summary-label">{curr.specialty}</span>
-                    <span className="summary-value">{formData.specialty}</span>
+                    <span className="summary-value">{formData.specialty || '—'}</span>
                   </div>
                   <div className="summary-item">
                     <span className="summary-label">{curr.city}</span>
-                    <span className="summary-value">{formData.city}</span>
+                    <span className="summary-value">{formData.city || '—'}</span>
                   </div>
                 </div>
 
                 <div className="checkbox-group">
-                  <input type="checkbox" name="acceptedTerms" checked={formData.acceptedTerms} onChange={handleChange} required />
+                  <input type="checkbox" name="acceptedTerms" defaultChecked={formData.acceptedTerms} onChange={handleChange} required />
                   <label className="checkbox-label">
                     {curr.terms}
                   </label>

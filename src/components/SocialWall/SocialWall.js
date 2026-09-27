@@ -133,7 +133,8 @@ export default function SocialWall({ shareCode, isAdmin = false }) {
         contentType = isImage ? 'image' : isVideo ? 'video' : 'file'
 
         const ext = selectedFile.name.split('.').pop()
-        const filePath = `${event.share_code}/${Date.now()}.${ext}`
+        // Utilise event.id pour que le policy de suppression fonctionne
+        const filePath = `event-uploads/${event.id}/${Date.now()}.${ext}`
         
         const { data, error: uploadError } = await supabase.storage
           .from('event-uploads')

@@ -1,21 +1,57 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import BrowseEvents from '@/components/BrowseEvents/BrowseEvents';
-import { getTranslations } from '@/lib/i18n';
+import { supabase } from '@/lib/supabase';
+import { useAuth } from '@/context/AuthContext';
 
 export const dynamic = 'force-dynamic';
 
 export default function EventsPage() {
-  const t = typeof window !== 'undefined' ? getTranslations('fr') : { events: { browse: 'Événements', loading: 'Chargement...' } };
+  const { user, loading: authLoading } = useAuth();
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Données mock directes (évite les dépendances Supabase)
-    const mockEventsData = [
+    if (!authLoading && !user) {
+      // En mode non connecté, afficher les événements publics (demo/MOCK pour l'exploration)
+      loadMockEvents();
+      return;
+    }
+    if (user) {
+      loadUserEvents(user.id);
+    } else {
+      loadMockEvents();
+    }
+  }, [user, authLoading]);
+
+  const loadUserEvents = async (userId) => {
+    if (!supabase) {
+      loadMockEvents();
+      return;
+    }
+    try {
+      const { data, error } = await supabase
+        .from('events')
+        .select('*')
+        .eq('status', 'active')
+        .order('created_at', { ascending: false })
+        .limit(20);
+      if (error) throw error;
+      setEvents(data || []);
+    } catch (err) {
+      console.error('Events load error:', err);
+      loadMockEvents();
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const loadMockEvents = () => {
+    const mock = [
       {
         id: 1,
-        title: 'Gala de Fin d\'Année 2026',
+        title: "Gala de Fin d'Année 2026",
         description: 'Un Gala exceptionnel pour célébrer les réalisations de la communauté photographique.',
         share_code: 'GALA2026',
         eventType: 'gala',
@@ -27,10 +63,6 @@ export default function EventsPage() {
         status: 'active',
         participant_count: 2,
         post_count: 2,
-        posts: [
-          { id: 1, userId: 1, username: 'jplumba', avatar: 'https://i.pravatar.cc/300?img=11', text: 'Prêt pour le Gala de ce soir !', createdAt: new Date(Date.now() - 3600000).toISOString() },
-          { id: 2, userId: 2, username: 'mariem', avatar: 'https://i.pravatar.cc/300?img=5', text: 'J\'arrive bientôt !', createdAt: new Date(Date.now() - 1800000).toISOString() },
-        ]
       },
       {
         id: 2,
@@ -46,14 +78,11 @@ export default function EventsPage() {
         status: 'active',
         participant_count: 1,
         post_count: 1,
-        posts: [
-          { id: 1, userId: 3, username: 'alainn', avatar: 'https://i.pravatar.cc/300?img=33', text: 'Super initiative ! Je suis motivé.', createdAt: new Date(Date.now() - 86400000).toISOString() },
-        ]
-      }
+      },
     ];
-    setEvents(mockEventsData);
+    setEvents(mock);
     setLoading(false);
-  }, []);
+  };
 
   if (loading) {
     return (
@@ -66,7 +95,7 @@ export default function EventsPage() {
         alignItems: 'center',
         justifyContent: 'center'
       }}>
-        <p style={{ color: '#a0a0a0' }}>{t.events.loading || 'Chargement...'}</p>
+        <p style={{ color: '#a0a0a0' }}>Chargement des événements...</p>
       </div>
     );
   }
@@ -85,14 +114,13 @@ export default function EventsPage() {
         marginBottom: '2rem',
         textAlign: 'center'
       }}>
-        {t.events.browse || 'Événements'}
+        Événements
       </h1>
-
       <BrowseEvents
         events={events}
-        userId={null}
-        isPhotographer={false}
-        t={t}
+        userId={user?.id || null}
+        isPhotographer={!!user}
+        t={{}}
       />
     </div>
   );

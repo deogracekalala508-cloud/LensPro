@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import { mockPhotographers, mockPhotos, mockGalleries } from '../lib/mockData';
+import { mockPhotographers, mockPhotos } from '../lib/mockData';
 
 const DemoContext = createContext();
 
@@ -44,23 +44,34 @@ export const DemoProvider = ({ children }) => {
   const [photographers, setPhotographers] = useState([]);
 
   useEffect(() => {
-    // Load saved settings from localStorage if available
-    const savedDemoMode = localStorage.getItem('lenspro_demo_mode');
-    if (savedDemoMode !== null) {
-      setDemoMode(savedDemoMode === 'true');
-    }
+    const initDemo = () => {
+      const savedDemoMode = localStorage.getItem('lenspro_demo_mode');
+      if (savedDemoMode !== null) {
+        setDemoMode(savedDemoMode === 'true');
+      }
 
-    const savedTestimonials = localStorage.getItem('lenspro_testimonials');
-    if (savedTestimonials) {
-      try {
-        setTestimonials(JSON.parse(savedTestimonials));
-      } catch (e) {}
-    }
+      const savedTestimonials = localStorage.getItem('lenspro_testimonials');
+      if (savedTestimonials) {
+        try {
+          setTestimonials(JSON.parse(savedTestimonials));
+        } catch (e) {}
+      }
 
-    const savedPhotographers = localStorage.getItem('lenspro_photographers');
-    if (savedPhotographers) {
+      const savedPhotographers = localStorage.getItem('lenspro_photographers');
+      if (savedPhotographers) {
+        try {
+          setPhotographers(JSON.parse(savedPhotographers));
+        } catch (e) {
+          setPhotographers(mockPhotographers);
+        }
+      } else {
+        setPhotographers(mockPhotographers);
+      }
+    };
+
+    if (typeof window !== 'undefined') {
       try {
-        setPhotographers(JSON.parse(savedPhotographers));
+        initDemo();
       } catch (e) {
         setPhotographers(mockPhotographers);
       }
@@ -79,7 +90,7 @@ export const DemoProvider = ({ children }) => {
     const newTesti = {
       id: Date.now(),
       date: new Date().toISOString().split('T')[0],
-      status: 'pending', // Pending admin approval by default
+      status: 'pending',
       rating: 5,
       avatar: `https://i.pravatar.cc/150?img=${Math.floor(Math.random() * 50) + 1}`,
       ...testimonial
