@@ -84,38 +84,43 @@ export default function RegisterPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (step < 3) {
+      // Lire les valeurs depuis le DOM pour les steps cachés
+      const fullName = document.querySelector('input[name="fullName"]')?.value || formData.fullName;
+      const email = document.querySelector('input[name="email"]')?.value || formData.email;
+      const password = document.querySelector('input[name="password"]')?.value || formData.password;
+      const confirmPassword = document.querySelector('input[name="confirmPassword"]')?.value || formData.confirmPassword;
+
+      // Mettre à jour l'état React pour la confirmation
+      setFormData(prev => ({ ...prev, fullName, email, password, confirmPassword }));
+
       nextStep();
       return;
     }
 
-    // Lire les valeurs directement depuis le formulaire DOM (mode uncontrolled)
-    const form = e.target;
-    const fd = new FormData(form);
-    const formDataFromDom = {
-      fullName: fd.get('fullName') || formData.fullName,
-      username: fd.get('username') || formData.username,
-      email: fd.get('email') || formData.email,
-      password: fd.get('password') || formData.password,
-      confirmPassword: fd.get('confirmPassword') || formData.confirmPassword,
-      city: fd.get('city') || formData.city,
-      specialty: fd.get('specialty') || formData.specialty,
-      acceptedTerms: formData.acceptedTerms || formDataFromDom.acceptedTerms === 'on',
-    };
+    // Lire les valeurs directement depuis le DOM (inputs toujours dans le DOM)
+    const fullName = document.querySelector('input[name="fullName"]')?.value || formData.fullName;
+    const email = document.querySelector('input[name="email"]')?.value || formData.email;
+    const password = document.querySelector('input[name="password"]')?.value || formData.password;
+    const confirmPassword = document.querySelector('input[name="confirmPassword"]')?.value || formData.confirmPassword;
+    const username = document.querySelector('input[name="username"]')?.value || formData.username;
+    const city = document.querySelector('input[name="city"]')?.value || formData.city;
+    const specialty = document.querySelector('select[name="specialty"]')?.value || formData.specialty;
+    const acceptedTerms = document.querySelector('input[type="checkbox"]')?.checked || formData.acceptedTerms;
 
-    if (formDataFromDom.password !== formDataFromDom.confirmPassword) {
+    if (password !== confirmPassword) {
       alert(curr.confirmPass + ' ne correspond pas.');
       return;
     }
 
     setErrors({});
-    const result = await signUp(formDataFromDom.email, formDataFromDom.password, {
-      fullName: formDataFromDom.fullName,
-      username: formDataFromDom.username,
-      city: formDataFromDom.city,
-      specialty: formDataFromDom.specialty,
+    const result = await signUp(email, password, {
+      fullName,
+      username,
+      city,
+      specialty
     });
     if (!result.success) {
-      setErrors({ form: result.error || (hasSupabase ? 'Erreur d\'inscription' : 'Erreur inscription') });
+      setErrors({ form: result.error || (hasSupabase ? "Erreur d'inscription" : 'Erreur inscription') });
       return;
     }
     router.push('/dashboard');
@@ -136,7 +141,7 @@ export default function RegisterPage() {
           </div>
 
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-            {/* Les inputs sont toujours dans le DOM pour que FormData les capture */}
+            {/* Les inputs sont toujours dans le DOM pour permettre la lecture directe des valeurs */}
 
             {/* Champ step 1 : informations personnelles */}
             <div style={{ display: step <= 1 ? 'block' : 'none', position: step > 1 ? 'absolute' : 'static', visibility: step > 1 ? 'hidden' : 'visible', pointerEvents: step > 1 ? 'none' : 'auto', width: '100%', paddingBottom: '1rem' }}>
