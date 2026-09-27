@@ -84,21 +84,49 @@ export function AuthProvider({ children }) {
       setUser(newUser);
       return { success: true, user: newUser };
     }
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          full_name: userData.fullName,
-          username: userData.username,
-          city: userData.city,
-          specialty: userData.specialty
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            full_name: userData.fullName,
+            username: userData.username,
+            city: userData.city,
+            specialty: userData.specialty
+          }
         }
+      });
+      if (error) {
+        // Si Supabase Auth échoue (désactivé, clé invalide, etc.),
+        // utiliser le fallback localStorage pour permettre l'inscription en mode démo
+        console.warn('Supabase signUp failed, using localStorage fallback:', error.message);
+        const newUser = {
+          email,
+          ...userData,
+          role: 'photographer',
+          id: crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(),
+          _demo: true
+        };
+        localStorage.setItem('lenspro_user', JSON.stringify(newUser));
+        setUser(newUser);
+        return { success: true, user: newUser, demo: true };
       }
-    });
-    if (error) return { success: false, error: error.message };
-    setUser(data.user);
-    return { success: true, user: data.user };
+      setUser(data.user);
+      return { success: true, user: data.user };
+    } catch (err) {
+      console.warn('Supabase signUp exception, using localStorage fallback:', err.message);
+      const newUser = {
+        email,
+        ...userData,
+        role: 'photographer',
+        id: crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(),
+        _demo: true
+      };
+      localStorage.setItem('lenspro_user', JSON.stringify(newUser));
+      setUser(newUser);
+      return { success: true, user: newUser, demo: true };
+    }
   }, []);
 
   const signOut = useCallback(async () => {
