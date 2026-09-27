@@ -147,42 +147,42 @@ export default function RegisterPage() {
             {/* Les inputs sont toujours dans le DOM pour permettre la lecture directe des valeurs */}
 
             {/* Champ step 1 : informations personnelles */}
-            <div style={{ display: step <= 1 ? 'block' : 'none', position: step > 1 ? 'absolute' : 'static', visibility: step > 1 ? 'hidden' : 'visible', pointerEvents: step > 1 ? 'none' : 'auto', width: '100%', paddingBottom: '1rem' }}>
+            <div style={{ display: step === 1 ? 'block' : 'none', width: '100%', paddingBottom: '1rem' }}>
               <h3 style={{ marginBottom: '1.5rem', textAlign: 'center', color: '#a1a1aa', fontWeight: 500 }}>{curr.s1Title}</h3>
               <div className="register-form-group">
                 <label className="register-label">{curr.fullName}</label>
-                <input type="text" name="fullName" defaultValue={formData.fullName} onChange={handleChange} className="register-input" required />
+                <input type="text" name="fullName" defaultValue={formData.fullName} onChange={handleChange} className="register-input" required={step === 1} />
               </div>
               <div className="register-form-group">
                 <label className="register-label">{curr.email}</label>
-                <input type="email" name="email" defaultValue={formData.email} onChange={handleChange} className="register-input" required />
+                <input type="email" name="email" defaultValue={formData.email} onChange={handleChange} className="register-input" required={step === 1} />
               </div>
               <div className="form-row">
                 <div className="register-form-group">
                   <label className="register-label">{curr.password}</label>
-                  <input type="password" name="password" defaultValue={formData.password} onChange={handleChange} className="register-input" required />
+                  <input type="password" name="password" defaultValue={formData.password} onChange={handleChange} className="register-input" required={step === 1} />
                 </div>
                 <div className="register-form-group">
                   <label className="register-label">{curr.confirmPass}</label>
-                  <input type="password" name="confirmPassword" defaultValue={formData.confirmPassword} onChange={handleChange} className="register-input" required />
+                  <input type="password" name="confirmPassword" defaultValue={formData.confirmPassword} onChange={handleChange} className="register-input" required={step === 1} />
                 </div>
               </div>
             </div>
 
             {/* Champ step 2 : détails du profil */}
-            <div style={{ display: step <= 2 ? 'block' : 'none', position: step > 2 ? 'absolute' : 'static', visibility: step > 2 ? 'hidden' : 'visible', pointerEvents: step > 2 ? 'none' : 'auto', width: '100%', paddingBottom: '1rem' }}>
+            <div style={{ display: step === 2 ? 'block' : 'none', width: '100%', paddingBottom: '1rem' }}>
               <h3 style={{ marginBottom: '1.5rem', textAlign: 'center', color: '#a1a1aa', fontWeight: 500 }}>{curr.s2Title}</h3>
               <div className="register-form-group">
                 <label className="register-label">{curr.username}</label>
-                <input type="text" name="username" defaultValue={formData.username} onChange={handleChange} className="register-input" required />
+                <input type="text" name="username" defaultValue={formData.username} onChange={handleChange} className="register-input" required={step === 2} />
               </div>
               <div className="register-form-group">
                 <label className="register-label">{curr.city}</label>
-                <input type="text" name="city" defaultValue={formData.city} onChange={handleChange} className="register-input" required />
+                <input type="text" name="city" defaultValue={formData.city} onChange={handleChange} className="register-input" required={step === 2} />
               </div>
               <div className="register-form-group">
                 <label className="register-label">{curr.specialty}</label>
-                <select name="specialty" defaultValue={formData.specialty} onChange={handleChange} className="register-select" required>
+                <select name="specialty" defaultValue={formData.specialty} onChange={handleChange} className="register-select" required={step === 2}>
                   <option value="">Sélectionnez...</option>
                   {curr.specOpts.map((opt) => (
                     <option key={opt} value={opt}>{opt}</option>

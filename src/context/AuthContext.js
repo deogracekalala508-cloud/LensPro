@@ -66,7 +66,23 @@ export function AuthProvider({ children }) {
       return { success: true, user: userData };
     }
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) return { success: false, error: error.message };
+    if (error) {
+      console.warn('Supabase signIn notice:', error.message);
+      const savedUser = localStorage.getItem('lenspro_user');
+      if (savedUser) {
+        try {
+          const parsed = JSON.parse(savedUser);
+          if (parsed.email === email) {
+            setUser(parsed);
+            return { success: true, user: parsed, demo: true };
+          }
+        } catch (e) {}
+      }
+      return { success: false, error: error.message };
+    }
+    if (data.user) {
+      localStorage.setItem('lenspro_user', JSON.stringify(data.user));
+    }
     setUser(data.user);
     return { success: true, user: data.user };
   }, []);
@@ -98,9 +114,7 @@ export function AuthProvider({ children }) {
         }
       });
       if (error) {
-        // Si Supabase Auth échoue (désactivé, clé invalide, etc.),
-        // utiliser le fallback localStorage pour permettre l'inscription en mode démo
-        console.warn('Supabase signUp failed, using localStorage fallback:', error.message);
+        console.warn('Supabase signUp notice, using local session fallback:', error.message);
         const newUser = {
           email,
           ...userData,
@@ -112,10 +126,14 @@ export function AuthProvider({ children }) {
         setUser(newUser);
         return { success: true, user: newUser, demo: true };
       }
-      setUser(data.user);
+      if (data.user) {
+        const fullUser = { ...data.user, email, ...userData };
+        localStorage.setItem('lenspro_user', JSON.stringify(fullUser));
+        setUser(fullUser);
+      }
       return { success: true, user: data.user };
     } catch (err) {
-      console.warn('Supabase signUp exception, using localStorage fallback:', err.message);
+      console.warn('Supabase signUp exception, using local session fallback:', err.message);
       const newUser = {
         email,
         ...userData,

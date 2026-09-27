@@ -21,21 +21,21 @@ export default function NewGallery() {
             <h3>Détails de la galerie</h3>
             <div className={styles.inputGroup}>
               <label>Titre de la galerie</label>
-              <input type="text" placeholder="Ex: Mariage Sophie & Jean" className={styles.input} />
+              <input type="text" name="title" placeholder="Ex: Mariage Sophie & Jean" className={styles.input} />
             </div>
             <div className={styles.inputGroup}>
               <label>Description</label>
-              <textarea placeholder="Un petit mot pour vos clients..." rows={3} className={styles.input}></textarea>
+              <textarea name="description" placeholder="Un petit mot pour vos clients..." rows={3} className={styles.input}></textarea>
             </div>
             
             <div className={styles.row}>
               <div className={styles.inputGroup}>
                 <label>Code PIN (Optionnel)</label>
-                <input type="text" placeholder="Ex: 1234" className={styles.input} />
+                <input type="text" name="pinCode" placeholder="Ex: 1234" className={styles.input} />
               </div>
               <div className={styles.inputGroup}>
                 <label>Date d'expiration</label>
-                <input type="date" className={styles.input} />
+                <input type="date" name="expiresAt" className={styles.input} />
               </div>
             </div>
           </div>
