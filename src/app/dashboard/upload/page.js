@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { supabase } from '@/lib/supabase';
@@ -13,6 +13,7 @@ const CATEGORIES = ['Portrait', 'Mariage', 'Événement', 'Mode', 'Nature', 'Spo
 export default function UploadPage() {
   const router = useRouter();
   const { user, loading: authLoading } = useAuth();
+  const fileInputRef = useRef(null);
   const [files, setFiles] = useState([]);
   const [uploadingIds, setUploadingIds] = useState(new Set());
   const [progress, setProgress] = useState({});
@@ -215,12 +216,13 @@ export default function UploadPage() {
           <p>ou</p>
           <input
             type="file"
+            ref={fileInputRef}
             accept="image/jpeg,image/png,image/webp"
             multiple
             onChange={handleFileSelect}
-            className={styles.browseInput}
+            style={{ display: 'none' }}
           />
-          <button type="button" className={styles.browseBtn} onClick={() => document.querySelector('input[type=file]').click()}>
+          <button type="button" className={styles.browseBtn} onClick={() => fileInputRef.current?.click()}>
             Parcourir les fichiers
           </button>
           <span className={styles.formats}>JPG, PNG, WEBP (Max 20MB)</span>

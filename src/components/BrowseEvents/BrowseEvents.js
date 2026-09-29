@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { createEvent } from '@/lib/events'
-import styles from './BrowseEvents.css'
+import styles from './BrowseEvents.module.css'
 
 export default function BrowseEvents({ events = [], userId, isPhotographer, t }) {
   const [showCreateForm, setShowCreateForm] = useState(false)
